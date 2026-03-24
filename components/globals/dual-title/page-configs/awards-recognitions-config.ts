@@ -1,0 +1,50 @@
+import { BaseDualTitleConfig } from './base-config';
+import { PageDualTitleConfig } from './types';
+
+export class AwardsRecognitionsConfig extends BaseDualTitleConfig {
+  public getConfig(): PageDualTitleConfig {
+    return {
+      verticalBorder: { 
+        desktop: 130, 
+        mobile: 180 
+      },
+      
+      specialRules: {
+        redTitleLeftAlign: true,
+        extraFontReduction: true
+      },
+      
+      classes: {
+        container: 'flex items-start justify-between min-h-fit max-[1290px]:flex-col max-[1290px]:gap-8',
+        section: 'w-full mx-auto relative z-30 mt-[107px] max-[1290px]:mt-10',
+        aside: 'flex-1 ml-8 mt-[-10px] flex justify-end max-[1290px]:flex-none max-[1290px]:ml-0 max-[1290px]:mt-0 max-[1290px]:justify-end max-[1290px]:w-full',
+        asideCaseResults: 'flex-1 mt-[55px] flex justify-end max-[1290px]:flex-none max-[1290px]:mt-0 max-[1290px]:justify-end max-[1290px]:w-full',
+        
+        divCaseResults: 'relative w-[760px] mr-9 max-[1290px]:mr-0 max-[560px]:w-full max-[560px]:overflow-hidden',
+        
+        title: 'text-white leading-none font-helvetica text-[52px] max-[690px]:text-[43px] max-[580px]:text-[36px] text-left mb-4 max-[385px]:text-[32px] max-[580px]:mb-0',
+        
+        titleSpacer: 'invisible font-helvetica text-[52px] max-[690px]:text-[43px] max-[580px]:text-[36px] leading-none max-[385px]:text-[32px]',
+        
+        titleRed: 'leading-none font-helvetica text-[52px] max-[690px]:text-[43px] max-[580px]:text-[36px] bg-gradient-to-l from-[#C02B27] to-[#ca403b] bg-clip-text text-transparent ml-[-1em] max-[385px]:text-[32px] max-[580px]:ml-[-1.5em] max-[490px]:ml-0',
+        
+        titleGrid: 'grid grid-cols-[max-content_1fr] items-start gap-0 max-[490px]:block',
+        
+        titleSpacerVisibility: 'max-[490px]:hidden',
+        
+        message: 'font-neue-montreal text-[21px] max-[690px]:text-[18px] max-[580px]:text-[16px] leading-[1.1] text-[#C7C7C7] text-left pl-10 max-[580px]:pl-0',
+        
+        messageCaseResults: 'font-neue-montreal text-[21px] max-[690px]:text-[18px] max-[580px]:text-[16px] leading-[1.1] text-[#C7C7C7] text-left pl-5 max-[580px]:pl-0',
+        
+        verticalBorderClasses: 'max-[580px]:hidden',
+        
+        containerHeight: 'min-h-[170px] max-[580px]:min-h-[80px]'
+      },
+      
+      config: {
+        showBackgroundImage: false,
+        responsiveBreakpoint: 1290
+      }
+    };
+  }
+}

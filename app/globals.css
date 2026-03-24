@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+:root {
+  --background: #140C0C;
+  --foreground: #140C0C;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-helvetica: var(--font-helvetica);
+  --font-neue-montreal: var(--font-neue-montreal);
+  --font-inter: var(--font-inter);
+}
+
+/* Global default font for elements without specific class */
+* {
+  font-family: var(--font-neue-montreal), "Neue Montreal", sans-serif;
+}
+
+/* Ensure Tailwind font classes take priority */
+.font-helvetica {
+  font-family: var(--font-helvetica), "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.font-neue-montreal {
+  font-family: var(--font-neue-montreal), "Neue Montreal", sans-serif !important;
+}
+
+.font-inter {
+  font-family: var(--font-inter), "Inter", sans-serif !important;
+}
+
+/* Exceptions for elements that should keep system font */
+svg, img, svg * {
+  font-family: inherit;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Prevent images and media from overflowing */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure text doesn't cause horizontal overflow and prevent orphan words */
+p, h1, h2, h3, h4, h5, h6, span, a, div, li, td, th {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  hyphens: none;
+  text-wrap: pretty;
+  orphans: 2;
+  widows: 2;
+  word-spacing: normal;
+}
+
+/* Special rules for titles and important text elements */
+.font-helvetica, 
+[class*="text-white"],
+[class*="uppercase"],
+[class*="leading-none"] {
+  word-break: keep-all !important;
+  hyphens: none !important;
+  text-wrap: balance !important;
+  white-space: pre-line;
+}
+
+/* Prevent single letters or very short words on new lines */
+* {
+  hanging-punctuation: first last;
+  text-rendering: optimizeLegibility;
+}
+
+/* Utility class for perfect text wrapping - use when needed */
+.text-no-orphans {
+  word-break: keep-all !important;
+  hyphens: none !important;
+  text-wrap: balance !important;
+  orphans: 3 !important;
+  widows: 3 !important;
+  word-spacing: 0.1em;
+  line-height: 1.2 !important;
+}
+
+/* For very important titles that should never break badly */
+.text-perfect-wrap {
+  word-break: keep-all !important;
+  hyphens: none !important;
+  text-wrap: balance !important;
+  orphans: 4 !important;
+  widows: 4 !important;
+  word-spacing: 0.05em;
+  white-space: pre-line;
+}
+
+/* Prevent horizontal overflow for tablet and mobile */
+@media (max-width: 1599px) {
+  html, body {
+    overflow-x: hidden !important;
+  }
+  
+  /* Prevent any component from causing horizontal scroll */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Hide overflow on main containers */
+  body > div {
+    overflow-x: hidden;
+  }
+}
+
+/* Extra aggressive horizontal scroll prevention for mobile */
+@media (max-width: 559px) {
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    position: relative;
+  }
+  
+  body {
+    width: 100vw !important;
+  }
+  
+  /* Force all elements to respect viewport width */
+  * {
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Aggressively hide overflow on all structural elements */
+  div:not([data-carousel]):not([data-carousel] *), 
+  section:not([data-carousel]):not([data-carousel] *), 
+  main:not([data-carousel]):not([data-carousel] *), 
+  article:not([data-carousel]):not([data-carousel] *), 
+  aside:not([data-carousel]):not([data-carousel] *), 
+  nav:not([data-carousel]):not([data-carousel] *), 
+  header:not([data-carousel]):not([data-carousel] *), 
+  footer:not([data-carousel]):not([data-carousel] *), 
+  form:not([data-carousel]):not([data-carousel] *), 
+  ul:not([data-carousel]):not([data-carousel] *), 
+  ol:not([data-carousel]):not([data-carousel] *), 
+  li:not([data-carousel]):not([data-carousel] *) {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+  
+  /* Target all width-related classes */
+  [class*="w-"]:not([data-carousel]):not([data-carousel] *), 
+  [class*="max-w-"]:not([data-carousel]):not([data-carousel] *), 
+  [class*="min-w-"]:not([data-carousel]):not([data-carousel] *), 
+  [class*="width"]:not([data-carousel]):not([data-carousel] *), 
+  [class*="container"]:not([data-carousel]):not([data-carousel] *) {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+  
+  /* Ensure images and media don't cause overflow */
+  img, video, canvas, svg, iframe {
+    max-width: 100vw !important;
+    height: auto !important;
+  }
+  
+  /* Force tables to be responsive */
+  table {
+    max-width: 100vw !important;
+    overflow-x: auto !important;
+    display: block !important;
+    white-space: nowrap;
+  }
+  
+  /* Nuclear option - force viewport constraint on everything */
+  #__next, [data-reactroot], .next-root {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+  
+  /* Prevent any positioned elements from causing overflow */
+  [class*="absolute"], [class*="fixed"], [class*="relative"] {
+    max-width: 100vw !important;
+  }
+  
+  /* Force all containers to behave */
+  [class*="container"]:not([data-carousel]):not([data-carousel] *), 
+  [class*="wrapper"]:not([data-carousel]):not([data-carousel] *), 
+  [class*="layout"]:not([data-carousel]):not([data-carousel] *) {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+  
+  /* Carousel specific rules - allow overflow for carousel functionality */
+  [data-carousel="true"] {
+    overflow-x: visible !important;
+    max-width: none !important;
+  }
+  
+  [data-carousel="true"] * {
+    overflow-x: visible !important;
+    max-width: none !important;
+  }
+}
+
+/* Desktop layout preservation */
+@media (min-width: 1600px) {
+  body {
+    overflow-x: auto;
+  }
+}
+
+/* Hide scrollbar for webkit browsers */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Global scrollbar hide */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Custom Scrollbar for Dropdown */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #140C0C;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #FF6460;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #e55651;
+}
+
+/* Fix autofill background to maintain transparent design */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: white !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* Additional autofill fix for different browsers */
+input:-moz-autofill,
+textarea:-moz-autofill {
+  background-color: transparent !important;
+  color: white !important;
+}
+
+/* Ensure autofill text color remains white */
+input:-webkit-autofill::first-line,
+textarea:-webkit-autofill::first-line {
+  color: white !important;
+  font-family: inherit !important;
+}
+
+/* Hide reCAPTCHA widget */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}

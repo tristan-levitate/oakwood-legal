@@ -1,0 +1,199 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 500px;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contentArea {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.squeezeContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #ffffff;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #FF6460;
+  margin: 0;
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #C7C7C7;
+  margin: 0;
+}
+
+.richContent {
+  color: #C7C7C7;
+  line-height: 1.6;
+}
+
+.richContent p {
+  margin-bottom: 1rem;
+}
+
+.richContent h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem 0;
+}
+
+.richContent ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.richContent li {
+  margin-bottom: 0.5rem;
+}
+
+.videoContainer {
+  margin: 2rem 0;
+}
+
+.video {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 12px;
+}
+
+.testimonialsSection {
+  margin-top: 2rem;
+}
+
+.formArea {
+  position: sticky;
+  top: 2rem;
+}
+
+.formContainer {
+  background: rgba(255, 100, 96, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 100, 96, 0.2);
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.phoneNumber {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #C7C7C7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.divider {
+  width: 30px;
+  height: 1px;
+  background: #FF6460;
+}
+
+.formTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.formDescription {
+  font-size: 1rem;
+  color: #C7C7C7;
+  margin: 0;
+}
+
+.highlight {
+  color: #FF6460;
+  font-weight: 600;
+}
+
+.formFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  filter: brightness(0) invert(1);
+}
+
+.tagline {
+  font-size: 0.875rem;
+  color: #C7C7C7;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .formArea {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .wrapper {
+    gap: 2rem;
+  }
+  
+  .formContainer {
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.5rem;
+  }
+}
