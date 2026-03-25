@@ -46,6 +46,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "cdn.sanity.io",
+        port: "",
+        pathname: "/images/scl1n88c/**",
+      },
+      {
+        protocol: "https",
         hostname: "cg-oakwood-legal-group.s3.us-east-1.amazonaws.com",
         port: "",
         pathname: "/**",
