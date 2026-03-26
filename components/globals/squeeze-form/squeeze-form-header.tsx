@@ -7,11 +7,11 @@ export default function SqueezeFormHeader() {
       {/* First Line - Call Button */}
       <div className="flex justify-start">
         <a 
-          href="tel:+18664056837"
+          href="tel:+18888047858"
           className="bg-transparent cursor-pointer text-[#D9D9D9] font-normal font-helvetica text-[16px] py-1 px-3 rounded-[6px] border border-[#FF503C] hover:bg-[rgba(255,80,60,0.1)] transition-colors duration-200"
-          aria-label="Call Oakwood Legal Group at (866) 405-6837"
+          aria-label="Call Oakwood Legal Group at 888-804-7858"
         >
-          CALL NOW (866) 405-6837
+          CALL NOW 888-804-7858
         </a>
       </div>
 

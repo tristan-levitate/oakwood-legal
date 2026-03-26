@@ -81,13 +81,13 @@ export default function PracticeAreasHero({ titleWhite, titleRed, message }: Pra
                 <div className="absolute bottom-8 left-8 flex gap-4 z-30">
                     {/* Call Button */}
                     <Link
-                        href="tel:+18664056837"
+                        href="tel:+18888047858"
                         className="flex cursor-pointer justify-center items-center gap-[5px] px-4 py-0 rounded-[6px] text-white font-normal font-helvetica"
                         style={{
                             background: '#C02B27'
                         }}
                     >
-                        Call (866) 405-6837
+                        Call 888-804-7858
                     </Link>
 
                     {/* Arrow Button - Same design as awards carousel next button */}

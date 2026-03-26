@@ -249,10 +249,10 @@ export default function Header() {
                 <FaPhone className="text-white text-[14px]" aria-hidden="true" />
               </IconWithCircle>
               <Link
-                href="tel:+18664056837"
+                href="tel:+18888047858"
                 className="text-white hover:text-gray-300 transition-colors duration-200 text-[14px]"
               >
-                (866) 405-6837
+                888-804-7858
               </Link>
             </div>
           </address>

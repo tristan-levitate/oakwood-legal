@@ -62,11 +62,11 @@ export default function HomeHero() {
                             {/* Right - Call Button */}
                             <div className="flex items-center">
                                 <a
-                                    href="tel:+18664056837"
+                                    href="tel:+18888047858"
                                     className="bg-[#C02B27] text-white px-4 py-2 rounded-md text-[16px] font-neue-montreal font-normal leading-normal hover:opacity-90 transition-opacity duration-200"
-                                    aria-label="Call Oakwood Legal Group at (866) 405-6837"
+                                    aria-label="Call Oakwood Legal Group at 888-804-7858"
                                 >
-                                    Call (866) 405-6837
+                                    Call 888-804-7858
                                 </a>
                             </div>
                         </div>
@@ -103,11 +103,11 @@ export default function HomeHero() {
                             {/* Right - Call Button */}
                             <div className="flex items-center">
                                 <a
-                                    href="tel:+18664056837"
+                                    href="tel:+18888047858"
                                     className="bg-[#C02B27] text-white px-4 py-2 rounded-md text-[16px] font-neue-montreal font-normal leading-normal hover:opacity-90 transition-opacity duration-200"
-                                    aria-label="Call Oakwood Legal Group at (866) 405-6837"
+                                    aria-label="Call Oakwood Legal Group at 888-804-7858"
                                 >
-                                    Call (866) 405-6837
+                                    Call 888-804-7858
                                 </a>
                             </div>
                         </div>

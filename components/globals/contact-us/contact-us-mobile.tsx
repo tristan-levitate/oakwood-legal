@@ -72,11 +72,11 @@ export default function ContactUsMobile() {
               <FaPhone className="text-white text-[14px] sm:text-[16px]" />
             </IconWithCircle>
             <Link
-              href="tel:+18664056837"
+              href="tel:+18888047858"
               className="text-white hover:text-gray-300 transition-colors duration-200 font-neue-montreal text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px]"
-              aria-label="Call Oakwood Legal Group at (866) 405-6837"
+              aria-label="Call Oakwood Legal Group at 888-804-7858"
             >
-              (866) 405-6837
+              888-804-7858
             </Link>
           </div>
         </address>

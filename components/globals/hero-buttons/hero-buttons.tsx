@@ -19,13 +19,13 @@ export default function HeroButtons({ page }: HeroButtonsProps) {
     <div className="flex max-[500px]:flex-col gap-4 max-[500px]:gap-3">
       {/* Call Button */}
       <Link
-        href="tel:+18664056837"
+        href="tel:+18888047858"
         className={`${callButtonClasses} w-[162px] h-[32px]`}
         style={{
           background: '#C02B27'
         }}
       >
-        Call (866) 405-6837
+        Call 888-804-7858
       </Link>
 
       {/* Squeeze Page: Book A Consultation Button (below 1080px) or Scroll Button (above 1080px) */}

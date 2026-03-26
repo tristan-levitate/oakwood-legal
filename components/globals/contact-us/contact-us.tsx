@@ -104,10 +104,10 @@ export default function ContactUsSection() {
                           <FaPhone className="text-white text-[14px]" />
                         </IconWithCircle>
                         <Link
-                          href="tel:+18664056837"
+                          href="tel:+18888047858"
                           className="text-white hover:text-gray-300 transition-colors duration-200 font-neue-montreal text-[16px] min-[768px]:text-[17px] min-[1024px]:text-lg"
                         >
-                          (866) 405-6837
+                          888-804-7858
                         </Link>
                       </li>
                     </ul>
@@ -253,10 +253,10 @@ export default function ContactUsSection() {
                         <FaPhone className="text-white text-[14px]" />
                       </IconWithCircle>
                       <Link
-                        href="tel:+18664056837"
+                        href="tel:+18888047858"
                         className="text-white hover:text-gray-300 transition-colors duration-200 font-neue-montreal text-[16px]"
                       >
-                        (866) 405-6837
+                        888-804-7858
                       </Link>
                     </li>
                   </ul>
@@ -394,10 +394,10 @@ export default function ContactUsSection() {
                               <FaPhone className="text-white text-[14px]" />
                             </IconWithCircle>
                             <Link
-                              href="tel:+18664056837"
+                              href="tel:+18888047858"
                               className="text-white hover:text-gray-300 transition-colors duration-200 font-neue-montreal text-[16px] min-[768px]:text-[17px] min-[1024px]:text-lg"
                             >
-                              (866) 405-6837
+                              888-804-7858
                             </Link>
                           </li>
                         </ul>
