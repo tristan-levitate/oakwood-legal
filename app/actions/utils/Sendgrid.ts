@@ -4,8 +4,9 @@ import { render } from "@react-email/render";
 import sgMail from "@sendgrid/mail";
 
 async function Sendgrid(data: FormSubmissionData) {
-  if (!process.env.SENDGRID_API_KEY)
-    return console.log(`SENDGRID_API_KEY not set, skipping email...`);
+  if (!process.env.SENDGRID_API_KEY) {
+    throw new Error("SENDGRID_API_KEY not set");
+  }
 
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -20,16 +21,15 @@ async function Sendgrid(data: FormSubmissionData) {
       "joemar@oakwoodlegal.com",
       "mike@oakwoodlegal.com",
     ],
-    from: process.env.SENDGRID_FROM_EMAIL || "noreply@oakwoodlegal.com",
+    from: process.env.SENDGRID_FROM_EMAIL || "no-reply@oakwoodlegal.com",
     subject: `Oakwood Legal Group Lead | ${data.fullName}`,
     html: emailHTML,
   };
 
   if (!msg.to || msg.to.length === 0) {
-    console.warn(
-      "No email recipients configured for Oakwood Legal Group notifications",
+    throw new Error(
+      "No email recipients configured for Oakwood Legal Group notifications"
     );
-    return;
   }
 
   try {

@@ -6,6 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import NewsletterInput from "../newsletter-input";
+import { submitNewsletter } from "@/app/actions/newsletter";
 
 // Newsletter Form Schema with Zod
 const newsletterSchema = z.object({
@@ -35,12 +36,7 @@ export default function NewsletterForm() {
   const onSubmit = async (data: INewsletterForm) => {
     setIsSubmitting(true);
     try {
-      // TODO: Implement newsletter subscription logic
-      console.log("Newsletter subscription:", data);
-
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await submitNewsletter(data);
       setFormSubmitted(true);
       reset();
     } catch (error) {

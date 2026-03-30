@@ -16,6 +16,8 @@ export interface INewsletterData {
   preheader: string;
   created_at: Date;
   updated_at: Date;
+  subscriberName?: string;
+  subscriberEmail?: string;
 }
 
 export interface ILeadDocketPayload {

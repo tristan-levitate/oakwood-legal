@@ -8,6 +8,16 @@ import MongoDB from "./utils/MongoDB";
 import Sendgrid from "./utils/Sendgrid";
 import { ILeadDocketPayload } from "./utils/types";
 
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message;
+  if (typeof error === "string") return error;
+  try {
+    return JSON.stringify(error);
+  } catch {
+    return "Unknown error";
+  }
+}
+
 async function getReCaptchaScore(token: string) {
   if (!token) {
     return { score: null };
@@ -98,17 +108,55 @@ export async function submitForm(
   };
 
   try {
-    await Promise.all([
+    const settled = await Promise.allSettled([
       Sendgrid(formData),
       Conversions_API_Meta(formData, event_name),
       LeadDocket(leadDocketPayload),
     ]);
 
-    await MongoDB(formData, "form-submissions");
+    const sendgridResult = settled[0];
+    const conversionsResult = settled[1];
+    const leadDocketResult = settled[2];
 
-    return { success: true };
+    const sendgrid =
+      sendgridResult.status === "fulfilled"
+        ? { status: "sent" as const }
+        : {
+            status: "failed" as const,
+            error: getErrorMessage(sendgridResult.reason),
+          };
+
+    let mongoDbErrorMessage: string | undefined = undefined;
+    try {
+      await MongoDB(formData, "form-submissions");
+    } catch (mongoError) {
+      mongoDbErrorMessage = getErrorMessage(mongoError);
+    }
+
+    const allSucceeded =
+      sendgridResult.status === "fulfilled" &&
+      conversionsResult.status === "fulfilled" &&
+      leadDocketResult.status === "fulfilled" &&
+      !mongoDbErrorMessage;
+
+    const error =
+      !allSucceeded && sendgrid.status === "failed"
+        ? sendgrid.error
+        : !allSucceeded && conversionsResult.status === "rejected"
+          ? getErrorMessage(conversionsResult.reason)
+          : !allSucceeded && leadDocketResult.status === "rejected"
+            ? getErrorMessage(leadDocketResult.reason)
+            : !allSucceeded && mongoDbErrorMessage
+              ? mongoDbErrorMessage
+              : undefined;
+
+    return { success: allSucceeded, error, sendgrid };
   } catch (error) {
     console.error("Form submission error:", error);
-    return { success: false, error: "Failed to submit form" };
+    return {
+      success: false,
+      error: getErrorMessage(error),
+      sendgrid: { status: "failed" as const, error: getErrorMessage(error) },
+    };
   }
 }

@@ -68,6 +68,15 @@ export default function ContactForm() {
         clientInfo
       );
 
+      if (result.sendgrid?.status === "sent") {
+        console.log("SendGrid email sent successfully");
+      } else if (result.sendgrid?.status === "failed") {
+        console.error(
+          "SendGrid email failed:",
+          result.sendgrid?.error || "Unknown error"
+        );
+      }
+
       Tracking.submitConversionTracking(
         data,
         "Oakwood Legal Group - Form Submission",
