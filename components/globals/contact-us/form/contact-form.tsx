@@ -77,12 +77,6 @@ export default function ContactForm() {
         );
       }
 
-      Tracking.submitConversionTracking(
-        data,
-        "Oakwood Legal Group - Form Submission",
-        clientInfo.eventId
-      );
-
       if (result.success) {
         setFormSubmitted(true);
         reset();

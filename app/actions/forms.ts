@@ -107,10 +107,16 @@ export async function submitForm(
     marketingSourceDetails: utmDetails,
   };
 
+  const conversionsPromise =
+    event_name === "Oakwood Legal Group - Form Submission" ||
+    event_name === "Oakwood Legal Group - Squeeze Page Form"
+      ? Promise.resolve()
+      : Conversions_API_Meta(formData, event_name);
+
   try {
     const settled = await Promise.allSettled([
       Sendgrid(formData),
-      Conversions_API_Meta(formData, event_name),
+      conversionsPromise,
       LeadDocket(leadDocketPayload),
     ]);
 

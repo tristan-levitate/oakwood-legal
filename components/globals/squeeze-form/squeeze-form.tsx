@@ -91,12 +91,6 @@ export default function SqueezeForm({ videos }: SqueezeFormProps) {
                 );
             }
 
-            Tracking.submitConversionTracking(
-                data,
-                "Oakwood Legal Group - Squeeze Page Form",
-                clientInfo.eventId
-            );
-
             if (result.success) {
                 setFormSubmitted(true);
                 reset();
