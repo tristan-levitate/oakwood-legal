@@ -24,14 +24,10 @@ async function Twilio(data: FormSubmissionData) {
     locationHref: "Page URL",
     score: "ReCaptcha Score",
     userAgent: "Browser Info",
-    leadIntelligenceScore: "CG Intelligence Score",
-    leadIntelligenceSummary: "CG Intelligence Summary",
   };
 
-  const leadScoreColor = Number(data.leadIntelligenceScore) >= 0.7 ? "🟢" : Number(data.leadIntelligenceScore) >= 0.4 ? "🟡" : "🔴";
-
   let TEXT_MESSAGE =
-    `${leadScoreColor} ***Oakwood Legal Group Lead***\n` +
+    `***Oakwood Legal Group Lead***\n` +
     `${Object.entries(DATA_LABEL_MAP)
       .map(([key, label]) => {
         const keyName = key as keyof FormSubmissionData;

@@ -38,8 +38,8 @@ export default function SqueezeFooter() {
           />
           <div className={styles.footerBottomContent}>
             <p>Oakwood Legal Group © {new Date().getFullYear()}. All Rights Reserved.</p>
-            <Link href="https://thecaselygroup.com/" target="_blank">
-              Powered by <span>The Casely Group</span>
+            <Link href="https://www.levitate.digital" target="_blank">
+              Powered by <span>Levitate</span>
             </Link>
           </div>
         </div>

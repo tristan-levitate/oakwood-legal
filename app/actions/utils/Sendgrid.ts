@@ -13,13 +13,6 @@ async function Sendgrid(data: FormSubmissionData) {
     pretty: true,
   });
 
-  const leadScoreColor =
-    Number(data.leadIntelligenceScore) >= 0.7
-      ? "🟢"
-      : Number(data.leadIntelligenceScore) >= 0.4
-        ? "🟡"
-        : "🔴";
-
   const msg = {
     to: [
       "mario@oakwoodlegal.com",
@@ -27,8 +20,8 @@ async function Sendgrid(data: FormSubmissionData) {
       "joemar@oakwoodlegal.com",
       "mike@oakwoodlegal.com",
     ],
-    from: "notifications@thecaselygroup.com",
-    subject: `${leadScoreColor} Oakwood Legal Group Lead | ${data.fullName}`,
+    from: process.env.SENDGRID_FROM_EMAIL || "noreply@oakwoodlegal.com",
+    subject: `Oakwood Legal Group Lead | ${data.fullName}`,
     html: emailHTML,
   };
 

@@ -27,8 +27,6 @@ const Email_Template = (data: FormSubmissionData) => {
     locationHref: "Page URL",
     score: "ReCaptcha Score",
     userAgent: "Browser Info",
-    leadIntelligenceScore: "CG Intelligence Score",
-    leadIntelligenceSummary: "CG Intelligence Summary",
   };
 
   return (

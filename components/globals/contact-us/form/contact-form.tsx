@@ -24,8 +24,6 @@ const formSchema = z.object({
   legalArea: z.string().min(1, "Legal area is required."),
   message: z.string().min(1, "Message is required."),
   newsletter: z.boolean().optional(),
-  leadIntelligenceScore: z.string().optional(),
-  leadIntelligenceSummary: z.string().optional(),
 });
 
 export type IContactForm = z.infer<typeof formSchema>;

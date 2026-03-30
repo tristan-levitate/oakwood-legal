@@ -1,13 +1,11 @@
 "use server";
 
 import { IContactForm } from "@/components/globals/contact-us/form/contact-form";
-import { leadIntelligence } from "@/utils/cgIntelligence";
 import { IClientInfo } from "../../utils/useGetClientInfo";
 import Conversions_API_Meta from "./utils/Conversions_API_Meta";
 import LeadDocket from "./utils/LeadDocket";
 import MongoDB from "./utils/MongoDB";
 import Sendgrid from "./utils/Sendgrid";
-import Twilio from "./utils/Twilio";
 import { ILeadDocketPayload } from "./utils/types";
 
 async function getReCaptchaScore(token: string) {
@@ -59,28 +57,6 @@ export async function submitForm(
 ) {
   const { score } = await getReCaptchaScore(token);
 
-  try{
-    const intelligence = await leadIntelligence(data);
-    data.leadIntelligenceScore = intelligence.scoreText;
-    data.leadIntelligenceSummary = intelligence.reasoningText;
-    console.log(`[LEAD INTELLIGENCE] Score: ${intelligence.scoreText} - Summary: ${intelligence.reasoningText}`);
-  }catch (error) {
-    console.error(`[LEAD INTELLIGENCE] Error getting lead intelligence: ${error}`);
-    data.leadIntelligenceScore = "0.5";
-    data.leadIntelligenceSummary = "Lead intelligence processing failed - manual review required";
-  }
-
-  const intelligenceScore = parseFloat(data.leadIntelligenceScore || "0");
-  if (intelligenceScore === 0 && !data.email.includes("@thecaselygroup.com")) {
-    console.log(`[LEAD INTELLIGENCE] Score is 0 and email is not from thecaselygroup.com - is obviously spam`);
-    return {success: true}
-  }
-
-  if (data.email.endsWith("-optimal@thecaselygroup.com")) {
-    console.log(`[LEAD INTELLIGENCE] Email ends with -optimal@thecaselygroup.com - optimal lead test email`);
-    data.leadIntelligenceScore = "0.9";
-  }
-
   const formData = {
     ...data,
     ...clientInfo,
@@ -123,7 +99,6 @@ export async function submitForm(
 
   try {
     await Promise.all([
-      Twilio(formData),
       Sendgrid(formData),
       Conversions_API_Meta(formData, event_name),
       LeadDocket(leadDocketPayload),

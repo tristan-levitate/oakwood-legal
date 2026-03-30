@@ -5,8 +5,6 @@ export default async function Conversions_API_Meta(
   data: FormSubmissionData,
   event_name: string
 ) {
-  const leadIntelligenceScore = Number(data.leadIntelligenceScore || 0);
-
   const event_params = {
     event_id: data.eventId,
     event_time: Math.round(Date.now() / 1000),
@@ -14,18 +12,6 @@ export default async function Conversions_API_Meta(
     event_source_url: data.locationHref,
     action_source: "website",
   };
-
-  if (leadIntelligenceScore >= 0.7) {
-    event_params.event_name = "Oakwood Legal Group | Optimal Lead";
-  }
-
-  if (leadIntelligenceScore >= 0.4 && leadIntelligenceScore < 0.7) {
-    event_params.event_name = "Oakwood Legal Group | Potential Lead";
-  }
-
-  if (leadIntelligenceScore < 0.4) {
-    event_params.event_name = "Oakwood Legal Group | Non-Target Lead";
-  }
 
   const [firstName, ...lastNameArray] = (data.fullName || "").split(" ");
   const lastName = lastNameArray.join(" ");

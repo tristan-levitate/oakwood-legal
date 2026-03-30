@@ -211,13 +211,13 @@ export default function FooterMobile() {
           <div className="text-sm">
             <span className="text-[#8E8484] font-neue-montreal">Powered by </span>
             <Link
-              href="https://thecaselygroup.com"
+              href="https://www.levitate.digital"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-300 transition-colors duration-200"
-              aria-label="Visit The Casely Group website (opens in new tab)"
+              aria-label="Visit Levitate website (opens in new tab)"
             >
-              The Casely Group
+              Levitate
             </Link>
           </div>
         </section>
