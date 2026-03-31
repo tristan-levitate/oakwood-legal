@@ -51,6 +51,7 @@ export default async function PracticeAreas() {
       </section>
 
       <ContactUs />
+
     </main>
   )
 }

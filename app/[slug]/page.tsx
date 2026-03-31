@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import DualHero from '@/components/globals/dual-hero/dual-hero';
 import PortableTextComponent from '@/components/globals/portable-text-component/portable-text-component';
 import dynamic from 'next/dynamic';
+import ContactUs from '@/components/globals/contact-us/contact-us'
 
 const SqueezeForm = dynamic(() => import('@/components/globals/squeeze-form/squeeze-form'), {
   loading: () => <div className="h-[600px] animate-pulse bg-gray-100 rounded-lg" />
@@ -161,6 +162,7 @@ export default async function SlugPage({
             </div>
           )}
         </section>
+        <ContactUs />
       </main>
     );
   }
