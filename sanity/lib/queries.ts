@@ -79,7 +79,7 @@ export const getAllMembersQuery = groq`
 `;
 
 export const getAllPracticeAreasQuery = groq`
-  *[_type == "practiceAreas"] | order(date desc) {
+  *[_type == "practiceAreas"] | order(orderRank) {
     titleForSEO,
     descriptionForSEO,
     title,

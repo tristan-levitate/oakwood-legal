@@ -1,3 +1,4 @@
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list";
 import { MdImage, MdLocationOn, MdVideoFile } from "react-icons/md";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
@@ -6,7 +7,9 @@ export default defineType({
   title: "Practice Areas",
   type: "document",
   icon: MdLocationOn,
+  orderings: [orderRankOrdering],
   fields: [
+    orderRankField({ type: "practiceAreas", newItemPosition: "before" }),
     defineField({
       name: "titleForSEO",
       title: "Title for SEO",

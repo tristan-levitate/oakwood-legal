@@ -14,6 +14,7 @@
     "@react-email/components": "^0.5.7",
     "@react-email/render": "^1.4.0",
     "@sanity/image-url": "^1.2.0",
+    "@sanity/orderable-document-list": "^1.5.1",
     "@sanity/vision": "^4.10.2",
     "@sendgrid/mail": "^8.1.6",
     "@types/uuid": "^11.0.0",
