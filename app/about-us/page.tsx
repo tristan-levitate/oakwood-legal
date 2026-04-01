@@ -29,7 +29,7 @@ export default async function AboutUsPage() {
       <DualHero
         titleWhite="ABOUT"
         titleRed="OAKWOOD LEGAL GROUP"
-        message="At Oakwood Legal Group, we transform the experience of personal injury into one of personal attention. Our mission is simple: fight relentlessly for victims, deliver record-setting results, and treat every client with the dignity and care they deserve."
+        message="At Oakwood Legal Group, our mission is simple: fight relentlessly for our clients, deliver record-setting results, and treat every client with the dignity and care they deserve."
         backgroundImage="/images/bg-practice-areas.svg"
         page="about-us"
       />

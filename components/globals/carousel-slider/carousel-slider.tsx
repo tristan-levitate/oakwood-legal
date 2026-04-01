@@ -179,53 +179,193 @@ export default function LogosCarousel({ variant, direction = "backward" }: Logos
     {
       type: "text",
       title: "",
-      content: "Car, truck, and \nmotorcycle accidents",
+      content: "Employment \nLaw",
     },
     {
       type: "text",
       title: "",
-      content: "Slip, trip, and \nfall injuries",
+      content: "Sexual \nHarassment",
     },
     {
       type: "text",
       title: "",
-      content: "Wrongful \ndeath claims",
+      content: "Wrongful \nTermination",
     },
     {
       type: "text",
       title: "",
-      content: "Sexual abuse \nand assault",
+      content: "Wage and Hour \nViolations",
     },
     {
       type: "text",
       title: "",
-      content: "Complex personal \ninjury litigation",
+      content: "Workplace \nDiscrimination",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Retaliation",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Auto \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Truck \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Pedestrian \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Motorcycle \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Bicycle \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Slips, Trips \nand Falls",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Uber and Lyft \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Wrongful \nDeath",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Hit and Run \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Head and Brain \nInjuries",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Sexual \nAbuse",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Clergy \nSexual Abuse",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Boy Scouts of \nAmerica Abuse",
     },
     // Duplicate for continuous scroll - same as awards/news
     {
       type: "text",
       title: "",
-      content: "Car, truck, and \nmotorcycle accidents",
+      content: "Employment \nLaw",
     },
     {
       type: "text",
       title: "",
-      content: "Slip, trip, and \nfall injuries",
+      content: "Sexual \nHarassment",
     },
     {
       type: "text",
       title: "",
-      content: "Wrongful \ndeath claims",
+      content: "Wrongful \nTermination",
     },
     {
       type: "text",
       title: "",
-      content: "Sexual abuse \nand assault",
+      content: "Wage and Hour \nViolations",
     },
     {
       type: "text",
       title: "",
-      content: "Complex personal \ninjury litigation",
+      content: "Workplace \nDiscrimination",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Retaliation",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Auto \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Truck \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Pedestrian \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Motorcycle \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Bicycle \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Slips, Trips \nand Falls",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Uber and Lyft \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Wrongful \nDeath",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Hit and Run \nAccidents",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Head and Brain \nInjuries",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Sexual \nAbuse",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Clergy \nSexual Abuse",
+    },
+    {
+      type: "text",
+      title: "",
+      content: "Boy Scouts of \nAmerica Abuse",
     },
   ];
 

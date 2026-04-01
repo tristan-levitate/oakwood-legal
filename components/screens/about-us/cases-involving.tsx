@@ -32,7 +32,7 @@ export default function CasesInvolving() {
                         {/* Featured Title */}
                         <header className="flex items-center justify-center flex-1">
                             <h2 className="text-white text-[38px] font-light uppercase text-center font-helvetica">
-                                California's Premier Personal Injury Firm
+                                California's Premier Personal Injury & Employment Law Firm
                             </h2>
                         </header>
                     </div>

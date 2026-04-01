@@ -7,12 +7,8 @@ import KeyFeaturesCarousel from './key-features-carousel';
 
 export default function AboutOlg() {
   const [lineWidth, setLineWidth] = useState(561);
-  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Ensure we're on the client side
-    setIsClient(true);
-
     const handleResize = () => {
       const width = window.innerWidth;
 
@@ -39,42 +35,6 @@ export default function AboutOlg() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Show loading state until client-side hydration is complete
-  if (!isClient) {
-    return (
-      <>
-        {/* Decorative Line - Top Right (Edge of screen) */}
-        <div className="w-full flex justify-end mb-6 max-[1450px]:mb-4 mt-24">
-          <DecorativeLine
-            mainLineWidth={561}
-            isRotated={true}
-            ariaLabel="About us line decoration"
-          />
-        </div>
-
-        <section className="w-full max-w-[1600px] mx-auto px-8">
-          {/* Rest of content with default values... */}
-          <header>
-            <div className="flex-1">
-              <p className="text-[#C7C7C7] text-[18px] max-w-[635px] font-neue-montreal" style={{ lineHeight: '160%' }}>
-                We go beyond the courtroom. If you're injured and can't travel, we come to you. We connect clients with trusted medical providers, fight to have insurance cover every bill, and even arrange vehicle repairs and rentals after an accident.
-              </p>
-            </div>
-          </header>
-        </section>
-
-        {/* Bottom Decorative Line (Edge of screen) */}
-        <div className="w-full flex justify-start mt-13">
-          <DecorativeLine
-            mainLineWidth={561}
-            isRotated={false}
-            ariaLabel="About us line decoration"
-          />
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       {/* Decorative Line - Top Right (Edge of screen) */}
@@ -87,14 +47,7 @@ export default function AboutOlg() {
       </div>
 
       <section className="w-full max-w-[1600px] mx-auto px-8">
-        {/* Introduction Section */}
-        <header>
-          <div className="flex-1">
-            <p className="text-[#C7C7C7] text-[18px] max-w-[635px] font-neue-montreal" style={{ lineHeight: '160%' }}>
-              We go beyond the courtroom. If you're injured and can't travel, we come to you. We connect clients with trusted medical providers, fight to have insurance cover every bill, and even arrange vehicle repairs and rentals after an accident.
-            </p>
-          </div>
-        </header>
+        
 
         {/* Key Features Section */}
         <section className="mt-8">
