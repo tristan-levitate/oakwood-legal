@@ -47,7 +47,6 @@ export default function AboutOlg() {
       </div>
 
       <section className="w-full max-w-[1600px] mx-auto px-8">
-        
 
         {/* Key Features Section */}
         <section className="mt-8">

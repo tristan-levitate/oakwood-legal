@@ -31,7 +31,7 @@ export default function CasesInvolving() {
 
                         {/* Featured Title */}
                         <header className="flex items-center justify-center flex-1">
-                            <h2 className="text-white text-[38px] font-light uppercase text-center font-helvetica">
+                            <h2 className="text-white text-[28px] font-light uppercase text-center font-helvetica">
                                 California's Premier Personal Injury & Employment Law Firm
                             </h2>
                         </header>
@@ -103,7 +103,7 @@ export default function CasesInvolving() {
                     {/* Text */}
                     <div className="flex items-center flex-1 max-[545px]:justify-center">
                         <h2 className="text-white text-[28px] max-[754px]:text-[20px] max-[545px]:text-[32px] max-[425px]:text-[24px] font-light uppercase font-helvetica">
-                            California's Premier Personal Injury Firm
+                            California's Premier Personal Injury & Employment Law Firm
                         </h2>
                     </div>
                 </div>
