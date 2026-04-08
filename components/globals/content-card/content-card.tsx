@@ -5,7 +5,7 @@ import ContentCardItem from './content-card-item';
 import { getSectionTitle } from './content-card-utils';
 
 // Type for content cards - only the properties actually used
-type ContentCardItem = Pick<ArticleProps, 'slug' | 'imageUrl' | 'title' | 'description'>;
+type ContentCardItem = Pick<ArticleProps, 'slug' | 'imageUrl' | 'title' | 'description' | 'link'>;
 
 interface ContentCardProps {
   items: ContentCardItem[];

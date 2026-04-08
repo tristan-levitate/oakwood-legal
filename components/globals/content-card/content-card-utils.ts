@@ -1,7 +1,7 @@
-export const getHrefForPage = (page: string | undefined, slug: string): string => {
+export const getHrefForPage = (page: string | undefined, slug: string, link?: string): string => {
   switch (page) {
     case 'cases-in-the-news':
-      return `/cases-in-the-news/${slug}`;
+      return link || `/cases-in-the-news/${slug}`;
     case 'practice-areas':
       return `/${slug}`;
     case 'articles':
@@ -33,7 +33,11 @@ export const getCtaText = (page: string | undefined): string => {
   }
 };
 
-export const getAriaLabel = (page: string | undefined, title: string): string => {
+export const getAriaLabel = (page: string | undefined, title: string, isExternal = false): string => {
+  if (isExternal) {
+    return `Open external link for ${title}`;
+  }
+
   const action = page === 'practice-areas' ? 'Learn more about' : 'Read more about';
   return `${action} ${title}`;
 };

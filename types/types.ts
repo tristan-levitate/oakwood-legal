@@ -34,6 +34,7 @@ export interface AwardsProps {
 export interface ArticleProps {
   title: string;
   slug: string;
+  link?: string;
   titleForSEO: string;
   descriptionForSEO: string;
   description: string;
@@ -47,6 +48,7 @@ export interface ArticleProps {
 export interface CaseInTheNewsProps {
   title: string;
   slug: string;
+  link?: string;
   titleForSEO: string;
   descriptionForSEO: string;
   description: string;
