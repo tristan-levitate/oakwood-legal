@@ -11,10 +11,16 @@ import IconWithCircle from "../icon-with-circle/icon-with-circle";
 import { ActiveTabIndicator } from "../shared-components/shared-components";
 import HeaderBackground from "./header-background/header-background";
 import HeaderMobile from "./header-mobile";
+import Submenu from "./submenu";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import { OakwoodLogo } from "../logo/OakwoodLogo";
+import type { PracticeAreaMenuItem } from "@/types/types";
 
-export default function Header() {
+interface HeaderProps {
+  practiceAreaMenuItems: PracticeAreaMenuItem[];
+}
+
+export default function Header({ practiceAreaMenuItems }: HeaderProps) {
   const pathname = usePathname();
   const isStudioPage = pathname.includes("studio");
   const isMobile = useMediaQuery("(max-width: 1360px)");
@@ -23,7 +29,7 @@ export default function Header() {
 
   // Return mobile header for screens smaller than 1360px
   if (isMobile) {
-    return <HeaderMobile />;
+    return <HeaderMobile practiceAreaMenuItems={practiceAreaMenuItems} />;
   }
 
   // Define which tabs are on the right side
@@ -46,15 +52,15 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full bg-[#140C0C] text-white relative" role="banner">
+    <header className="w-full bg-[#140C0C] text-white relative overflow-visible" role="banner">
       {/* Background SVG - Below everything */}
       <div className="absolute inset-0 z-0 flex items-start justify-center" aria-hidden="true">
         <HeaderBackground />
       </div>
 
-      <div className="w-full max-w-[1600px] mx-auto px-8 py-4 relative z-10">
+      <div className="w-full max-w-[1600px] mx-auto px-8 py-4 relative z-50 overflow-visible">
         {/* Main Navigation Bar */}
-        <div className="flex items-center justify-between w-full">
+        <div className="relative z-30 flex items-center justify-between w-full">
           {/* Primary Navigation - Left */}
           <nav className="hidden lg:inline-flex items-center gap-[20px]" aria-label="Primary navigation">
             {/* Home */}
@@ -87,20 +93,7 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* Practice Areas */}
-            <div className="relative">
-              {pathname === "/practice-areas" && <ActiveTabIndicator />}
-              <Link
-                href="/practice-areas"
-                className={`relative z-10 transition-colors duration-200 font-normal text-base capitalize flex items-center justify-center ${pathname === "/practice-areas"
-                  ? "text-white px-4 py-2 pl-8 rounded-md gap-[5px]"
-                  : "text-white hover:text-gray-300"
-                  }`}
-                aria-current={pathname === "/practice-areas" ? "page" : undefined}
-              >
-                Practice Areas
-              </Link>
-            </div>
+            <Submenu items={practiceAreaMenuItems} pathname={pathname} />
 
             {/* Case Results */}
             <div className="relative">

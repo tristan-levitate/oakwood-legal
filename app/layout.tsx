@@ -7,6 +7,9 @@ import { LoadingProvider } from "@/components/globals/loading-context/loading-co
 import { Tracking } from "@/components/Tracking";
 import localFont from "next/font/local";
 import { Inter } from "next/font/google";
+import { getPracticeAreaSubMenuData } from "@/utils/submenu-data";
+import type { PracticeAreaMenuItem } from "@/types/types";
+
 
 const helvetica = localFont({
   src: [
@@ -84,17 +87,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let practiceAreaMenuItems: PracticeAreaMenuItem[] = [];
+  try {
+    practiceAreaMenuItems = await getPracticeAreaSubMenuData();
+  } catch {
+
+    practiceAreaMenuItems = [];
+  }
+
   return (
     <html lang="en">
       <body className={`antialiased @container font-sans ${helvetica.variable} ${neueMontreal.variable} ${inter.variable}`} style={{overflowX: 'hidden'}}>
         <LoadingProvider>
           <LayoutWrapper>
-            <Header />
+          <Header practiceAreaMenuItems={practiceAreaMenuItems} />
             {children}
             <Footer />
           </LayoutWrapper>

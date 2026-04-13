@@ -5,16 +5,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { RiInstagramFill } from "react-icons/ri";
-import { FaLinkedin, FaFacebook, FaPhone, FaXmark } from "react-icons/fa6";
+import { FaLinkedin, FaFacebook, FaPhone, FaXmark, FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { IoMailSharp } from "react-icons/io5";
 import IconWithCircle from "../icon-with-circle/icon-with-circle";
 import HamburgerMenuIcon from "./hamburger-menu-icon";
 import { OakwoodLogo } from "../logo/OakwoodLogo";
 import { ASSETS } from '@/utils/assets';
+import type { PracticeAreaMenuItem } from "@/types/types";
 
-export default function HeaderMobile() {
+interface HeaderMobileProps {
+  practiceAreaMenuItems: PracticeAreaMenuItem[];
+}
+
+export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPracticeAreasOpen, setIsPracticeAreasOpen] = useState(false);
   const pathname = usePathname();
+  const normalizedPath = pathname.replace(/^\/+|\/+$/g, "");
+  const isPracticeAreaDetailPage = practiceAreaMenuItems.some((item) => item.slug === normalizedPath);
+  const isPracticeAreasActive = pathname === "/practice-areas" || isPracticeAreaDetailPage;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -37,6 +46,7 @@ export default function HeaderMobile() {
   // Close menu when pathname changes
   useEffect(() => {
     setIsMenuOpen(false);
+    setIsPracticeAreasOpen(false);
   }, [pathname]);
 
   // Function to scroll to contact us section
@@ -223,17 +233,67 @@ export default function HeaderMobile() {
                 About Us
               </Link>
 
-              <Link
-                href="/practice-areas"
-                className={`block py-4 px-6 rounded-md transition-colors duration-200 text-lg font-normal font-helvetica text-left ${
-                  pathname === "/practice-areas" 
-                    ? "bg-gradient-to-r from-[#7D110E] to-[#140C0C] text-white" 
-                    : "text-white hover:bg-white/10"
+              <div
+                className={`rounded-md transition-colors duration-200 ${
+                  isPracticeAreasActive ? "bg-gradient-to-r from-[#7D110E] to-[#140C0C]" : "hover:bg-white/10"
                 }`}
-                onClick={toggleMenu}
               >
-                Practice Areas
-              </Link>
+                <div className="flex items-center">
+                  <Link
+                    href="/practice-areas"
+                    className="flex-1 py-4 px-6 text-lg font-normal font-helvetica text-left text-white"
+                    onClick={toggleMenu}
+                  >
+                    Practice Areas
+                  </Link>
+
+                  {practiceAreaMenuItems.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => setIsPracticeAreasOpen((prev) => !prev)}
+                      className="px-4 py-4 text-white hover:opacity-80 transition-opacity duration-200"
+                      aria-label="Toggle practice areas submenu"
+                      aria-expanded={isPracticeAreasOpen}
+                    >
+                      {isPracticeAreasOpen ? (
+                        <FaChevronUp className="text-sm" />
+                      ) : (
+                        <FaChevronDown className="text-sm" />
+                      )}
+                    </button>
+                  )}
+                </div>
+
+                {practiceAreaMenuItems.length > 0 && (
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out ${
+                      isPracticeAreasOpen ? "grid-rows-[1fr] pb-3" : "grid-rows-[0fr]"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="pl-10 pr-4 space-y-2">
+                        {practiceAreaMenuItems.map((item) => {
+                          const href = `/${item.slug}`;
+                          const isSubItemActive = pathname === href;
+
+                          return (
+                            <Link
+                              key={item.slug}
+                              href={href}
+                              className={`block rounded-md px-4 py-2 text-base font-normal font-helvetica transition-colors duration-200 ${
+                                isSubItemActive ? "bg-white/10 text-white" : "text-white/90 hover:bg-white/10"
+                              }`}
+                              onClick={toggleMenu}
+                            >
+                              {item.title}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
 
               <Link
                 href="/case-results"

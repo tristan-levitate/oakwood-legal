@@ -126,3 +126,9 @@ export interface OtherAreaProps {
   content: TypedObject | TypedObject[];
   titlePage: string;
 }
+
+/* Sub Menu - Practice Areas */
+export type PracticeAreaMenuItem = {
+  title: string;
+  slug: string;
+}
