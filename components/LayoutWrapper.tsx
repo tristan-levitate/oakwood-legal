@@ -5,17 +5,38 @@ import { ReactNode } from "react";
 
 interface LayoutWrapperProps {
   children: ReactNode;
+  header?: ReactNode;
+  footer?: ReactNode;
 }
 
-export default function LayoutWrapper({ children }: LayoutWrapperProps) {
+const BARE_ROUTES = ["/ca/employment-law"];
+
+export default function LayoutWrapper({ children, header, footer }: LayoutWrapperProps) {
   const pathname = usePathname();
   const isStudioPage = pathname.includes("studio");
+  const isBare = BARE_ROUTES.some(
+    (r) => pathname === r || pathname.startsWith(r + "/")
+  );
 
-  // If it's a studio page, render children without the max-width container
-  if (isStudioPage) {
+  if (isBare) {
     return <div className="w-full">{children}</div>;
   }
 
-  // For all other pages, render children with the max-width container
-  return <div className="w-full max-w-[1600px] mx-auto">{children}</div>;
+  if (isStudioPage) {
+    return (
+      <div className="w-full">
+        {header}
+        {children}
+        {footer}
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full max-w-[1600px] mx-auto">
+      {header}
+      {children}
+      {footer}
+    </div>
+  );
 }
