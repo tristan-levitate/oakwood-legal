@@ -79,7 +79,7 @@ export default function EmploymentLawLP() {
           message: form.description || `Case type: ${form.case_type}`,
           newsletter: false,
         },
-        "Oakwood Legal Group - Employment Law PPC LP",
+        "Oakwood Legal Group - Squeeze Page Form",
         token,
         clientInfo
       );
