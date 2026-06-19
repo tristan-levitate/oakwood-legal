@@ -40,6 +40,7 @@ declare global {
     grecaptcha: any;
     gtag: any;
     fbq: any;
+    dataLayer: any[];
   }
 }
 
