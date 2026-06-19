@@ -223,15 +223,12 @@ export default function EmploymentLawLP() {
         <div className="attorney-inner">
           <div className="section-label">Who you&apos;re working with</div>
           <div className="attorney-card">
-            <Image
-              src="/images/attorney-elan-zektser.png"
-              alt="Elan Zektser"
-              width={200}
-              height={200}
-              className="attorney-avatar"
-              style={{ objectFit: "cover", objectPosition: "60% top" }}
-              priority
-            />
+            <img
+  src="https://i.imgur.com/IIEExHu.jpeg"
+  alt="Elan Zektser"
+  className="attorney-avatar"
+  style={{ objectFit: "cover", objectPosition: "60% top" }}
+/>
             <div className="attorney-info">
               <div className="attorney-name">Elan Zektser</div>
               <div className="attorney-title">Founding Attorney</div>
