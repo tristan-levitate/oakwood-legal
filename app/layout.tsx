@@ -104,10 +104,9 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`antialiased @container font-sans ${helvetica.variable} ${neueMontreal.variable} ${inter.variable}`} style={{overflowX: 'hidden'}}>
         <LoadingProvider>
-          <LayoutWrapper>
-          <Header practiceAreaMenuItems={practiceAreaMenuItems} />
-            {children}
-            <Footer />
+          <LayoutWrapper header={<Header practiceAreaMenuItems={practiceAreaMenuItems} />} footer={<Footer />}>
+  {children}
+</LayoutWrapper>
           </LayoutWrapper>
         </LoadingProvider>
         {process.env.NEXT_PUBLIC_GA4_ID && (
