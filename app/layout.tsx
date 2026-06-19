@@ -107,7 +107,6 @@ export default async function RootLayout({
           <LayoutWrapper header={<Header practiceAreaMenuItems={practiceAreaMenuItems} />} footer={<Footer />}>
   {children}
 </LayoutWrapper>
-          </LayoutWrapper>
         </LoadingProvider>
         {process.env.NEXT_PUBLIC_GA4_ID && (
           <Tracking.GA4 GA4_ID={process.env.NEXT_PUBLIC_GA4_ID} />
