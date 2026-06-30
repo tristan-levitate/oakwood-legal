@@ -585,11 +585,10 @@
   aspect-ratio: 1 / 1;
   object-fit: cover;
   object-position: 60% top;
-  align-self: flex-start;
   flex: 0 0 auto;
 }
 /* Mobile: lock the image to a true square so it can't render as an oval. */
 @media (max-width: 559px) {
-  .lp-root img.attorney-avatar { width: 120px !important; height: 120px !important; }
+  .lp-root img.attorney-avatar { width: 120px !important; height: 120px !important; margin: 0 auto; }
 }
 .lp-root .nav-logo { cursor: default; }
