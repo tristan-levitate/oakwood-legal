@@ -139,24 +139,52 @@ export async function submitForm(
       mongoDbErrorMessage = getErrorMessage(mongoError);
     }
 
-    const allSucceeded =
-      sendgridResult.status === "fulfilled" &&
-      conversionsResult.status === "fulfilled" &&
+    // LeadDocket swallows its own errors and resolves with { success: false }
+    // on failure, so a "fulfilled" status does not mean the lead was accepted.
+    // Inspect the returned value to know if the CRM actually took the lead.
+    const leadDocketAccepted =
       leadDocketResult.status === "fulfilled" &&
-      !mongoDbErrorMessage;
+      (leadDocketResult.value as { success?: boolean })?.success !== false;
 
-    const error =
-      !allSucceeded && sendgrid.status === "failed"
+    const sendgridSent = sendgridResult.status === "fulfilled";
+
+    // The lead is "captured" if it reached at least one destination that the
+    // firm actually monitors: the LeadDocket CRM or the email notification.
+    // MongoDB and Meta Conversions are best-effort side-channels and must not
+    // block the user-facing success state.
+    const leadCaptured = leadDocketAccepted || sendgridSent;
+
+    // Log any side-channel failures so they can be fixed, without failing UX.
+    if (!sendgridSent) {
+      console.error("[forms.ts] SendGrid failed:", sendgrid.error);
+    }
+    if (!leadDocketAccepted) {
+      console.error(
+        "[forms.ts] LeadDocket did not accept the lead:",
+        leadDocketResult.status === "fulfilled"
+          ? leadDocketResult.value
+          : getErrorMessage(leadDocketResult.reason)
+      );
+    }
+    if (conversionsResult.status === "rejected") {
+      console.error(
+        "[forms.ts] Meta Conversions failed:",
+        getErrorMessage(conversionsResult.reason)
+      );
+    }
+    if (mongoDbErrorMessage) {
+      console.error("[forms.ts] MongoDB failed:", mongoDbErrorMessage);
+    }
+
+    const error = leadCaptured
+      ? undefined
+      : sendgrid.status === "failed"
         ? sendgrid.error
-        : !allSucceeded && conversionsResult.status === "rejected"
-          ? getErrorMessage(conversionsResult.reason)
-          : !allSucceeded && leadDocketResult.status === "rejected"
-            ? getErrorMessage(leadDocketResult.reason)
-            : !allSucceeded && mongoDbErrorMessage
-              ? mongoDbErrorMessage
-              : undefined;
+        : leadDocketResult.status === "rejected"
+          ? getErrorMessage(leadDocketResult.reason)
+          : "Lead could not be delivered to any destination.";
 
-    return { success: allSucceeded, error, sendgrid };
+    return { success: leadCaptured, error, sendgrid };
   } catch (error) {
     console.error("Form submission error:", error);
     return {
