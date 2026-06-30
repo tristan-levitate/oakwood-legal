@@ -6,6 +6,21 @@ import "../lp.css";
 const PHONE_DISPLAY = "888-804-7858";
 const PHONE_HREF = "tel:+18888047858";
 
+const STEPS = [
+  {
+    title: "We review your details",
+    body: "An attorney personally reviews what you shared, usually within a few hours.",
+  },
+  {
+    title: "We call you",
+    body: "Expect a call from our team within one business day to talk through your situation.",
+  },
+  {
+    title: "We discuss your options",
+    body: "Your consultation is free, confidential, and comes with no obligation.",
+  },
+];
+
 export default function ThankYouPage() {
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -15,7 +30,10 @@ export default function ThankYouPage() {
   }, []);
 
   return (
-    <div className="lp-root">
+    <div
+      className="lp-root"
+      style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+    >
       <nav className="nav" aria-label="Site header">
         <span className="nav-logo" aria-label="Oakwood Legal Group">
           <span className="nav-monogram" aria-hidden="true">OLG</span>
@@ -32,9 +50,26 @@ export default function ThankYouPage() {
         </a>
       </nav>
 
-      <section className="hero" aria-labelledby="ty-heading" style={{ minHeight: "60vh", display: "flex", alignItems: "center" }}>
+      <section
+        className="hero"
+        aria-labelledby="ty-heading"
+        style={{
+          flex: "1 0 auto",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <div className="hero-glow" aria-hidden="true" />
-        <div className="hero-inner" style={{ textAlign: "center" }}>
+        <div
+          className="hero-inner"
+          style={{
+            textAlign: "center",
+            paddingTop: 32,
+            paddingBottom: 32,
+            width: "100%",
+          }}
+        >
           <div
             style={{
               margin: "0 auto 20px",
@@ -53,10 +88,76 @@ export default function ThankYouPage() {
             </svg>
           </div>
           <h1 id="ty-heading">Thank you. Your request is in.</h1>
-          <p className="hero-sub" style={{ margin: "0 auto 28px" }}>
+          <p className="hero-sub" style={{ margin: "0 auto 36px" }}>
             An attorney from Oakwood Legal Group will review your situation and
-            reach out shortly. Everything you shared is completely confidential.
+            call you within one business day. Everything you shared is completely
+            confidential.
           </p>
+
+          <ol
+            style={{
+              listStyle: "none",
+              padding: 0,
+              margin: "0 auto 36px",
+              maxWidth: 920,
+              display: "grid",
+              gap: 16,
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              textAlign: "left",
+            }}
+          >
+            {STEPS.map((step, i) => (
+              <li
+                key={step.title}
+                style={{
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: 8,
+                  padding: "20px 22px",
+                }}
+              >
+                <div
+                  style={{
+                    width: 30,
+                    height: 30,
+                    borderRadius: "50%",
+                    background: "#b91c1c",
+                    color: "#fff",
+                    fontSize: 14,
+                    fontWeight: 700,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 12,
+                  }}
+                  aria-hidden="true"
+                >
+                  {i + 1}
+                </div>
+                <h2
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: "#fff",
+                    margin: "0 0 6px",
+                  }}
+                >
+                  {step.title}
+                </h2>
+                <p
+                  style={{
+                    fontSize: 13.5,
+                    lineHeight: 1.6,
+                    color: "rgba(255,255,255,0.72)",
+                    margin: 0,
+                  }}
+                >
+                  {step.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+
           <div className="hero-cta-group" style={{ justifyContent: "center" }}>
             <a href={PHONE_HREF} className="btn-primary">
               <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -68,7 +169,7 @@ export default function ThankYouPage() {
         </div>
       </section>
 
-      <footer>
+      <footer style={{ flexShrink: 0 }}>
         <div className="footer-inner">
           <p className="footer-copy">
             © 2026 Oakwood Legal Group &nbsp;·&nbsp; 8124 W 3rd St 2nd Floor, Los
