@@ -5,6 +5,7 @@ import Footer from "@/components/globals/footer/footer";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { LoadingProvider } from "@/components/globals/loading-context/loading-context";
 import { Tracking } from "@/components/Tracking";
+import { GTMHead, GTMNoScript } from "@/components/GTM";
 import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import { getPracticeAreaSubMenuData } from "@/utils/submenu-data";
@@ -102,7 +103,11 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <GTMHead />
+      </head>
       <body className={`antialiased @container font-sans ${helvetica.variable} ${neueMontreal.variable} ${inter.variable}`} style={{overflowX: 'hidden'}}>
+        <GTMNoScript />
         <LoadingProvider>
           <LayoutWrapper header={<Header practiceAreaMenuItems={practiceAreaMenuItems} />} footer={<Footer />}>
   {children}
