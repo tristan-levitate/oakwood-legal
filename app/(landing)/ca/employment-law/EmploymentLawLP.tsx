@@ -219,7 +219,7 @@ export default function EmploymentLawLP() {
       </div>
 
       {/* Attorney Callout */}
-      <div className="attorney-bg">
+      <div className="attorney-bg" id="about">
         <div className="attorney-inner">
           <div className="section-label">Who you&apos;re working with</div>
           <div className="attorney-card">
@@ -262,7 +262,7 @@ export default function EmploymentLawLP() {
       </div>
 
       {/* Results Bar */}
-      <div className="results-bg">
+      <div className="results-bg" id="results">
         <div className="results-grid">
           <div>
             <div className="result-num">$4M</div>
@@ -371,7 +371,7 @@ export default function EmploymentLawLP() {
       </div>
 
       {/* Urgency */}
-      <div className="urgency" role="alert">
+      <div className="urgency" role="alert" id="deadline">
         <div className="urgency-inner">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
@@ -390,7 +390,7 @@ export default function EmploymentLawLP() {
       </div>
 
       {/* Testimonials */}
-      <div className="testi-bg">
+      <div className="testi-bg" id="testimonials">
         <div className="testi-bg-inner">
           <div className="section-label">Client results</div>
           <h2 className="section-h2">What our former clients say</h2>
@@ -445,7 +445,7 @@ export default function EmploymentLawLP() {
       </div>
 
       {/* Why Oakwood */}
-      <div className="why-bg">
+      <div className="why-bg" id="why">
         <div className="why-bg-inner">
           <div className="section-label">Why Oakwood</div>
           <h2 className="section-h2">We don&apos;t file claims. We build cases.</h2>
