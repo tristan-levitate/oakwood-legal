@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { submitForm } from "@/app/actions/forms";
@@ -34,6 +34,7 @@ const CHIPS = [
 
 export default function EmploymentLawLP() {
   const router = useRouter();
+  const hasPushedConversion = useRef(false);
   const clientInfo = useGetClientInfo();
 
   const [activeChip, setActiveChip] = useState("Sexual harassment");
@@ -85,7 +86,8 @@ export default function EmploymentLawLP() {
       );
 
       if (result.success) {
-        if (typeof window !== "undefined") {
+        if (typeof window !== "undefined" && !hasPushedConversion.current) {
+          hasPushedConversion.current = true;
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: "form_submission_success" });
         }
