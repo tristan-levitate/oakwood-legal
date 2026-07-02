@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import "../lp.css";
 
 const PHONE_DISPLAY = "888-804-7858";
@@ -22,13 +21,6 @@ const STEPS = [
 ];
 
 export default function ThankYouPage() {
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "form_submission_success" });
-    }
-  }, []);
-
   return (
     <div
       className="lp-root"
