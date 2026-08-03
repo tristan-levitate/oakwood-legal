@@ -16,10 +16,10 @@ async function Sendgrid(data: FormSubmissionData) {
 
   const msg = {
     to: [
-      "mario@oakwoodlegal.com",
-      "mckoy@oakwoodlegal.com",
-      "joemar@oakwoodlegal.com",
-      "mike@oakwoodlegal.com",
+      "ashe@outliercreativeagency.com",
+      "dustin@outliercreativeagency.com",
+      "elan@oakwoodlegal.com",
+      "khanajwa950@gmail.com",
     ],
     from: process.env.SENDGRID_FROM_EMAIL || "no-reply@oakwoodlegal.com",
     subject: `Oakwood Legal Group Lead | ${data.fullName}`,
