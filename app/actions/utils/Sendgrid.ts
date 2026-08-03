@@ -32,7 +32,7 @@ async function Sendgrid(data: FormSubmissionData) {
     "ashe@outliercreativeagency.com",
     "dustin@outliercreativeagency.com",
     "elan@oakwoodlegal.com",
-    "khanajwa950@gmail.com",
+    "seo@outliercreativeagency.com",
   ];
 
   const transporter = nodemailer.createTransport({
