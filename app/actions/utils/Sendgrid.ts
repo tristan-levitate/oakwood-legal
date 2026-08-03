@@ -5,14 +5,22 @@ import nodemailer from "nodemailer";
 
 // Lead-notification email for the Oakwood PPC landing page.
 // Sent via Brevo's SMTP relay (free tier). Requires these env vars in Vercel:
-//   BREVO_SMTP_USER  - the Brevo SMTP login (looks like 9xxxxx@smtp-brevo.com)
+//   BREVO_SMTP_USER  - the Brevo SMTP login (looks like a4ce37001@smtp-brevo.com)
 //   BREVO_SMTP_KEY   - the Brevo SMTP key (from Brevo > SMTP & API > SMTP)
 //   MAIL_FROM        - a Brevo-verified sender, e.g. seo@outliercreativeagency.com
 // The function name/export are unchanged so forms.ts needs no edits.
 async function Sendgrid(data: FormSubmissionData) {
+  console.log("[MAIL] Brevo sender starting…");
+
   const user = process.env.BREVO_SMTP_USER;
   const pass = process.env.BREVO_SMTP_KEY;
   const from = process.env.MAIL_FROM || "seo@outliercreativeagency.com";
+
+  console.log("[MAIL] env present?", {
+    hasUser: !!user,
+    hasPass: !!pass,
+    from,
+  });
 
   if (!user || !pass) {
     throw new Error("BREVO_SMTP_USER / BREVO_SMTP_KEY not set");
@@ -35,16 +43,20 @@ async function Sendgrid(data: FormSubmissionData) {
   });
 
   try {
-    await transporter.sendMail({
+    // Proves the SMTP credentials + connection are valid before sending.
+    await transporter.verify();
+    console.log("[MAIL] Brevo SMTP connection verified");
+
+    const info = await transporter.sendMail({
       from: `"Oakwood Legal Group" <${from}>`,
       to: recipients.join(", "),
       subject: `Oakwood Legal Group Lead | ${data.fullName}`,
       html: emailHTML,
       replyTo: data.email || undefined,
     });
-    console.log("Email sent successfully via Brevo");
+    console.log("[MAIL] Sent via Brevo. messageId:", info.messageId, "accepted:", info.accepted);
   } catch (error) {
-    console.error("Failed to send email:", error);
+    console.error("[MAIL] Failed to send via Brevo:", error);
     throw error;
   }
 }
