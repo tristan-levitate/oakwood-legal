@@ -39,7 +39,11 @@ export default function CustomSelect({
   const selectedOption = options.find(opt => opt.value === fieldValue);
 
   return (
-    <div className={`relative w-full pt-4 max-[560px]:pb-6 ${className}`}>
+    <div
+      className={`relative w-full pt-4 ${
+        isDropdownOpen ? "max-[560px]:pb-2" : "max-[560px]:pb-6"
+      } ${className}`}
+    >
       {/* Hidden input for form registration */}
       <input
         {...register(name)}
@@ -47,18 +51,6 @@ export default function CustomSelect({
         value={fieldValue || ""}
       />
       
-      {/* Dropdown Trigger */}
-      <div
-        onClick={toggleDropdown}
-        className={`w-full bg-transparent text-sm sm:text-base lg:text-lg pb-2 pt-3 border-0 border-b-1 cursor-pointer transition-all duration-200 pr-8 sm:pr-10 ${
-          fieldValue ? 'text-white' : 'text-[rgba(255,255,255,0.7)]'
-        } ${
-          isDropdownOpen ? 'border-[#FF6460]' : 'border-[rgba(255,255,255,0.7)]'
-        }`}
-      >
-        {selectedOption ? selectedOption.label : placeholder}
-      </div>
-
       {/* Label */}
       <label
         className="absolute left-0 top-0 text-[rgba(255,255,255,0.7)] text-sm lg:text-[14px] font-helvetica font-normal leading-[1.4] capitalize transition-all duration-200 z-10 pointer-events-none"
@@ -66,27 +58,41 @@ export default function CustomSelect({
         {label}
       </label>
 
-      {/* Custom dropdown arrow */}
-      <div className="absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
-        <svg
-          className={`w-5 h-5 text-[rgba(255,255,255,0.7)] transition-transform duration-200 ${
-            isDropdownOpen ? 'rotate-180' : ''
+      {/* Dropdown Trigger */}
+      <div className="relative">
+        <div
+          onClick={toggleDropdown}
+          className={`w-full bg-transparent text-sm sm:text-base lg:text-lg pb-2 pt-3 border-0 border-b-1 cursor-pointer transition-all duration-200 pr-8 sm:pr-10 ${
+            fieldValue ? 'text-white' : 'text-[rgba(255,255,255,0.7)]'
+          } ${
+            isDropdownOpen ? 'border-[#FF6460]' : 'border-[rgba(255,255,255,0.7)]'
           }`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+          {selectedOption ? selectedOption.label : placeholder}
+        </div>
+
+        {/* Custom dropdown arrow */}
+        <div className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+          <svg
+            className={`w-5 h-5 text-[rgba(255,255,255,0.7)] transition-transform duration-200 ${
+              isDropdownOpen ? 'rotate-180' : ''
+            }`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
       </div>
 
       {/* Dropdown Options */}
       {isDropdownOpen && (
         <div
-          className="absolute top-full left-0 w-full bg-[#140C0C] border border-[rgba(255,255,255,0.3)] rounded-md mt-1 z-50 max-h-48 overflow-y-auto custom-scrollbar"
+          className="left-0 w-full bg-[#140C0C] border border-[rgba(255,255,255,0.3)] rounded-md mt-1 z-50 max-[560px]:relative max-[560px]:top-auto max-[560px]:max-h-none max-[560px]:overflow-visible min-[561px]:absolute min-[561px]:top-full min-[561px]:max-h-48 min-[561px]:overflow-y-auto custom-scrollbar"
           style={{
-            scrollbarWidth: 'thin',
-            scrollbarColor: '#FF6460 #140C0C'
+            scrollbarWidth: "thin",
+            scrollbarColor: "#FF6460 #140C0C",
           }}
         >
           {options.slice(1).map((option) => (

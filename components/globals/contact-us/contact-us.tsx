@@ -32,7 +32,7 @@ export default function ContactUsSection() {
 
       <div className="w-full mx-auto px-4 sm:px-8 py-8 relative z-10">
         {/* Mobile Layout (below 560px) */}
-        <div className="block min-[560px]:hidden max-w-full overflow-hidden">
+        <div className="block min-[560px]:hidden max-w-full">
           <ContactUsMobile />
         </div>
 

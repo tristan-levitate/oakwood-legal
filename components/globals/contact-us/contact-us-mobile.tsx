@@ -11,7 +11,7 @@ import ContactFormMobile from "./form/contact-form-mobile";
 
 export default function ContactUsMobile() {
   return (
-    <section className="w-full max-w-full overflow-hidden px-4 sm:px-6 md:px-8" aria-labelledby="contact-section-title">
+    <section className="w-full max-w-full px-4 sm:px-6 md:px-8" aria-labelledby="contact-section-title">
       {/* Section Header */}
       <header className="flex justify-start mb-8">
         <div className="flex justify-center items-center rounded-md px-[12px] py-[8px] bg-gradient-to-r from-[#C02B27] to-[#C02B27]" role="banner">
