@@ -7,8 +7,8 @@ import { submitForm } from "@/app/actions/forms";
 import { useGetClientInfo } from "@/utils/useGetClientInfo";
 import { Tracking } from "@/components/Tracking";
 
-const PHONE_DISPLAY = "888-804-7858";
-const PHONE_HREF = "tel:+18888047858";
+const PHONE_DISPLAY = "323-412-4595";
+const PHONE_HREF = "tel:+13234124595";
 
 const CASE_TYPES = [
   "Sexual harassment",
