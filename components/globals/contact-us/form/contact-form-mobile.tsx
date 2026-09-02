@@ -9,6 +9,9 @@ import CustomInput from "../custom-input";
 import CustomTextarea from "../custom-textarea";
 import CustomSelect from "../custom-select";
 import CustomCheckbox from "../custom-checkbox";
+import { submitForm } from "@/app/actions/forms";
+import { useGetClientInfo } from "@/utils/useGetClientInfo";
+import { Tracking } from "@/components/Tracking";
 
 // Form Schema with Zod
 const formSchema = z.object({
@@ -19,7 +22,7 @@ const formSchema = z.object({
     .email("Please enter a valid email address."),
   phone: z.string().min(1, "Phone number is required."),
   legalArea: z.string().min(1, "Legal area is required."),
-  helpMessage: z.string().min(1, "Message is required."),
+  message: z.string().min(1, "Message is required."),
   newsletter: z.boolean().optional(),
 });
 
@@ -28,6 +31,7 @@ export type IContactFormMobile = z.infer<typeof formSchema>;
 export default function ContactFormMobile() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const clientInfo = useGetClientInfo();
 
   const methods = useForm<IContactFormMobile>({
     resolver: zodResolver(formSchema),
@@ -36,7 +40,7 @@ export default function ContactFormMobile() {
       email: "",
       phone: "",
       legalArea: "",
-      helpMessage: "",
+      message: "",
       newsletter: false,
     },
   });
@@ -49,19 +53,40 @@ export default function ContactFormMobile() {
     { value: 'car-accident', label: 'Car Accident' },
     { value: 'medical-malpractice', label: 'Medical Malpractice' },
     { value: 'wrongful-death', label: 'Wrongful Death' },
+    { value: 'sexual-abuse', label: 'Sexual Abuse' },
+    { value: 'employment', label: 'Employment' },
     { value: 'other', label: 'Other' }
   ];
 
   const onSubmit = async (data: IContactFormMobile) => {
     setIsSubmitting(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setFormSubmitted(true);
-      reset();
+      const { token } = await Tracking.getRecaptchaToken();
+
+      const result = await submitForm(
+        data,
+        "Oakwood Legal Group - Form Submission",
+        token,
+        clientInfo
+      );
+
+      if (result.email?.status === "sent") {
+        console.log("Lead email sent successfully");
+      } else if (result.email?.status === "failed") {
+        console.error(
+          "Lead email failed:",
+          result.email?.error || "Unknown error"
+        );
+      }
+
+      if (result.success) {
+        setFormSubmitted(true);
+        reset();
+      } else {
+        console.error("Form submission failed:", result.error);
+      }
     } catch (error) {
-      console.error("Form submission error:", error);
+      console.error("Contact form submission error:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -146,7 +171,7 @@ export default function ContactFormMobile() {
                 {/* How We Can Help - Textarea */}
                 <div className="w-full">
                   <CustomTextarea
-                    name="helpMessage"
+                    name="message"
                     label="How We Can Help?"
                     placeholder="How We Can Help?"
                     rows={3}

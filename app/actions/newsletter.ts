@@ -14,7 +14,7 @@ export async function submitNewsletter(data: {
     title: "Oakwood Legal Group Newsletter",
     slug: "oakwood-legal-group-newsletter",
     html: "",
-    from_email: process.env.SENDGRID_FROM_EMAIL || "noreply@oakwoodlegal.com",
+    from_email: process.env.MAIL_FROM || "noreply@oakwoodlegal.com",
     from_name: "Oakwood Legal Group",
     preheader: "",
     created_at: now,

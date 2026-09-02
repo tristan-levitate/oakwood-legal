@@ -21,7 +21,10 @@ import va from "@vercel/analytics";
  * RECAPTCHA_SECRET_KEY - ReCaptcha backend key for transforming the client token into a score
  *
  * MONGODB_URI - MongoDB Atlas URI
- * SENDGRID_API_KEY - SendGrid API key (shared on Vercel)
+ * SMTP2GO_USER - SMTP2Go SMTP username
+ * SMTP2GO_PASS - SMTP2Go SMTP password
+ * MAIL_FROM - Verified sender email for lead notifications
+ * SMTP_HOST - SMTP2Go server (e.g. mail-eu.smtp2go.com)
  *
  * TWILIO_ACCOUNT_SID - Twilio Account Id (shared on Vercel)
  * TWILIO_AUTH_TOKEN - Twilio API Key (shared on Vercel)
@@ -32,7 +35,7 @@ import va from "@vercel/analytics";
 
 /**
  * Script to install it all
- * pnpm i @vercel/speed-insights @vercel/analytics uuid mongodb @sendgrid/mail @react-email/render @react-email/components twilio zod hash.js
+ * pnpm i @vercel/speed-insights @vercel/analytics uuid mongodb nodemailer @react-email/render @react-email/components twilio zod hash.js
  */
 
 declare global {

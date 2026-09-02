@@ -5,7 +5,7 @@ import { IClientInfo } from "../../utils/useGetClientInfo";
 import Conversions_API_Meta from "./utils/Conversions_API_Meta";
 import LeadDocket from "./utils/LeadDocket";
 import MongoDB from "./utils/MongoDB";
-import Sendgrid from "./utils/Sendgrid";
+import { sendLeadEmail } from "./utils/mail";
 import { ILeadDocketPayload } from "./utils/types";
 
 function getErrorMessage(error: unknown) {
@@ -115,21 +115,21 @@ export async function submitForm(
 
   try {
     const settled = await Promise.allSettled([
-      Sendgrid(formData),
+      sendLeadEmail(formData),
       conversionsPromise,
       LeadDocket(leadDocketPayload),
     ]);
 
-    const sendgridResult = settled[0];
+    const emailResult = settled[0];
     const conversionsResult = settled[1];
     const leadDocketResult = settled[2];
 
-    const sendgrid =
-      sendgridResult.status === "fulfilled"
+    const email =
+      emailResult.status === "fulfilled"
         ? { status: "sent" as const }
         : {
             status: "failed" as const,
-            error: getErrorMessage(sendgridResult.reason),
+            error: getErrorMessage(emailResult.reason),
           };
 
     let mongoDbErrorMessage: string | undefined = undefined;
@@ -146,17 +146,17 @@ export async function submitForm(
       leadDocketResult.status === "fulfilled" &&
       (leadDocketResult.value as { success?: boolean })?.success !== false;
 
-    const sendgridSent = sendgridResult.status === "fulfilled";
+    const emailSent = emailResult.status === "fulfilled";
 
     // The lead is "captured" if it reached at least one destination that the
     // firm actually monitors: the LeadDocket CRM or the email notification.
     // MongoDB and Meta Conversions are best-effort side-channels and must not
     // block the user-facing success state.
-    const leadCaptured = leadDocketAccepted || sendgridSent;
+    const leadCaptured = leadDocketAccepted || emailSent;
 
     // Log any side-channel failures so they can be fixed, without failing UX.
-    if (!sendgridSent) {
-      console.error("[forms.ts] SendGrid failed:", sendgrid.error);
+    if (!emailSent) {
+      console.error("[forms.ts] Lead email failed:", email.error);
     }
     if (!leadDocketAccepted) {
       console.error(
@@ -178,19 +178,19 @@ export async function submitForm(
 
     const error = leadCaptured
       ? undefined
-      : sendgrid.status === "failed"
-        ? sendgrid.error
+      : email.status === "failed"
+        ? email.error
         : leadDocketResult.status === "rejected"
           ? getErrorMessage(leadDocketResult.reason)
           : "Lead could not be delivered to any destination.";
 
-    return { success: leadCaptured, error, sendgrid };
+    return { success: leadCaptured, error, email };
   } catch (error) {
     console.error("Form submission error:", error);
     return {
       success: false,
       error: getErrorMessage(error),
-      sendgrid: { status: "failed" as const, error: getErrorMessage(error) },
+      email: { status: "failed" as const, error: getErrorMessage(error) },
     };
   }
 }

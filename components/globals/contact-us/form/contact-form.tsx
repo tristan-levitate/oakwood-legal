@@ -53,6 +53,8 @@ export default function ContactForm() {
     { value: 'car-accident', label: 'Car Accident' },
     { value: 'medical-malpractice', label: 'Medical Malpractice' },
     { value: 'wrongful-death', label: 'Wrongful Death' },
+    { value: 'sexual-abuse', label: 'Sexual Abuse' },
+    { value: 'employment', label: 'Employment' },
     { value: 'other', label: 'Other' }
   ];
 
@@ -68,12 +70,12 @@ export default function ContactForm() {
         clientInfo
       );
 
-      if (result.sendgrid?.status === "sent") {
-        console.log("SendGrid email sent successfully");
-      } else if (result.sendgrid?.status === "failed") {
+      if (result.email?.status === "sent") {
+        console.log("Lead email sent successfully");
+      } else if (result.email?.status === "failed") {
         console.error(
-          "SendGrid email failed:",
-          result.sendgrid?.error || "Unknown error"
+          "Lead email failed:",
+          result.email?.error || "Unknown error"
         );
       }
 
