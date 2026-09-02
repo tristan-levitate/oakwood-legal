@@ -35,6 +35,7 @@ export async function sendLeadEmail(data: FormSubmissionData) {
     "dustin@outliercreativeagency.com",
     "elan@oakwoodlegal.com",
     "seo@outliercreativeagency.com",
+    "mike@oakwoodlegal.com",
   ];
 
   const transporter = nodemailer.createTransport({
