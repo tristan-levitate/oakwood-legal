@@ -104,6 +104,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+        <Tracking.OpenAI />
         <GTMHead />
       </head>
       <body className={`antialiased @container font-sans ${helvetica.variable} ${neueMontreal.variable} ${inter.variable}`} style={{overflowX: 'hidden'}}>

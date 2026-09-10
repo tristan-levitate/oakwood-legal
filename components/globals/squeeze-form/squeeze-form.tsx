@@ -94,6 +94,7 @@ export default function SqueezeForm({ videos }: SqueezeFormProps) {
             }
 
             if (result.success) {
+                Tracking.trackOpenAILead();
                 setFormSubmitted(true);
                 reset();
             } else {

@@ -80,6 +80,7 @@ export default function ContactFormMobile() {
       }
 
       if (result.success) {
+        Tracking.trackOpenAILead();
         setFormSubmitted(true);
         reset();
       } else {

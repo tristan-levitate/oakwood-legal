@@ -80,6 +80,7 @@ export default function ContactForm() {
       }
 
       if (result.success) {
+        Tracking.trackOpenAILead();
         setFormSubmitted(true);
         reset();
       } else {

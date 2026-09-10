@@ -86,6 +86,7 @@ export default function EmploymentLawLP() {
       );
 
       if (result.success) {
+        Tracking.trackOpenAILead();
         if (typeof window !== "undefined" && !hasPushedConversion.current) {
           hasPushedConversion.current = true;
           window.dataLayer = window.dataLayer || [];

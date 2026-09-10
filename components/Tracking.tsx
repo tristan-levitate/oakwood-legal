@@ -31,6 +31,8 @@ import va from "@vercel/analytics";
  * TWILIO_MESSAGING_SERVICE_SID - Twilio Phone number that sends the message (shared on Vercel)
  *
  * NEXT_PUBLIC_CALL_RAIL_SRC - Call Rail's script URL
+ *
+ * NEXT_PUBLIC_OPENAI_PIXEL_ID - OpenAI Ads Measurement Pixel ID
  */
 
 /**
@@ -43,6 +45,7 @@ declare global {
     grecaptcha: any;
     gtag: any;
     fbq: any;
+    oaiq: ((...args: unknown[]) => void) & { q?: unknown[] };
     dataLayer: any[];
   }
 }
@@ -146,6 +149,49 @@ function Meta({ META_PIXEL_ID }: MetaPixelProps) {
   );
 }
 
+interface OpenAIPixelProps {
+  PIXEL_ID?: string;
+}
+
+/** Sitewide OpenAI Ads Measurement Pixel — place near the top of <head>. */
+function OpenAI({
+  PIXEL_ID = process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID || "PH4CAe2CmrYUTh9Fvy6grh",
+}: OpenAIPixelProps) {
+  return (
+    <Script id="openai-ads-pixel" strategy="beforeInteractive">
+      {`(function (w, d, s, u) {
+  if (w.oaiq) return;
+  var q = function () { q.q.push(arguments); };
+  q.q = [];
+  w.oaiq = q;
+  var js = d.createElement(s);
+  js.async = true;
+  js.src = u;
+  var f = d.getElementsByTagName(s)[0];
+  f.parentNode.insertBefore(js, f);
+})(window, document, "script", "https://bzrcdn.openai.com/sdk/oaiq.min.js");
+
+oaiq("init", {
+  pixelId: "${PIXEL_ID}"
+});`}
+    </Script>
+  );
+}
+
+/**
+ * Fire OpenAI lead_created only after confirmed successful form submission.
+ * Do not pass names, phones, case details, or other form contents.
+ */
+export function trackOpenAILead() {
+  if (typeof window === "undefined" || typeof window.oaiq !== "function") {
+    return;
+  }
+
+  window.oaiq("measure", "lead_created", {
+    type: "customer_action",
+  });
+}
+
 /**
  *  Submit conversions to all major platforms
  *
@@ -189,7 +235,9 @@ export const Tracking = {
   GA4,
   CallRail,
   ReCaptchaV3,
+  OpenAI,
   getRecaptchaToken,
+  trackOpenAILead,
   VercelInsights,
   VercelAnalytics,
   submitConversionTracking,
