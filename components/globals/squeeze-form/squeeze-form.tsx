@@ -65,7 +65,6 @@ export default function SqueezeForm({ videos }: SqueezeFormProps) {
         { value: '', label: 'Legal Area Of Your Case' },
         { value: 'personal-injury', label: 'Personal Injury' },
         { value: 'car-accident', label: 'Car Accident' },
-        { value: 'medical-malpractice', label: 'Medical Malpractice' },
         { value: 'wrongful-death', label: 'Wrongful Death' },
         { value: 'sexual-abuse', label: 'Sexual Abuse' },
         { value: 'employment', label: 'Employment' },

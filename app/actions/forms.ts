@@ -5,7 +5,7 @@ import { IClientInfo } from "../../utils/useGetClientInfo";
 import Conversions_API_Meta from "./utils/Conversions_API_Meta";
 import LeadDocket from "./utils/LeadDocket";
 import MongoDB from "./utils/MongoDB";
-import { sendLeadEmail } from "./utils/mail";
+import { sendClientConfirmationEmail, sendLeadEmail } from "./utils/mail";
 import { ILeadDocketPayload } from "./utils/types";
 
 function getErrorMessage(error: unknown) {
@@ -176,6 +176,29 @@ export async function submitForm(
       console.error("[forms.ts] MongoDB failed:", mongoDbErrorMessage);
     }
 
+    // Client confirmation is best-effort: only send after the lead was
+    // captured, and never fail the user-facing success state if it fails.
+    let clientConfirmation:
+      | { status: "sent" }
+      | { status: "failed"; error: string }
+      | { status: "skipped" } = { status: "skipped" };
+
+    if (leadCaptured) {
+      try {
+        await sendClientConfirmationEmail(formData);
+        clientConfirmation = { status: "sent" };
+      } catch (confirmationError) {
+        clientConfirmation = {
+          status: "failed",
+          error: getErrorMessage(confirmationError),
+        };
+        console.error(
+          "[forms.ts] Client confirmation email failed:",
+          clientConfirmation.error
+        );
+      }
+    }
+
     const error = leadCaptured
       ? undefined
       : email.status === "failed"
@@ -184,13 +207,14 @@ export async function submitForm(
           ? getErrorMessage(leadDocketResult.reason)
           : "Lead could not be delivered to any destination.";
 
-    return { success: leadCaptured, error, email };
+    return { success: leadCaptured, error, email, clientConfirmation };
   } catch (error) {
     console.error("Form submission error:", error);
     return {
       success: false,
       error: getErrorMessage(error),
       email: { status: "failed" as const, error: getErrorMessage(error) },
+      clientConfirmation: { status: "skipped" as const },
     };
   }
 }
