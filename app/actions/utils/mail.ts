@@ -54,6 +54,8 @@ export async function sendLeadEmail(data: FormSubmissionData) {
     "elan@oakwoodlegal.com",
     "seo@outliercreativeagency.com",
     "mike@oakwoodlegal.com",
+    "mckoy@oakwoodlegal.com",
+    "mario@oakwoodlegal.com"
   ];
 
   const transporter = createTransporter();
