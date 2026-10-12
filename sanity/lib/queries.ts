@@ -66,7 +66,7 @@ export const getAllAwardsQuery = groq`
 
 /** members */
 export const getAllMembersQuery = groq`
-  *[_type == "members"] | order(_createdAt asc) {
+  *[_type == "members"] | order(orderRank) {
     _id,
     seo_title,
     seo_description,

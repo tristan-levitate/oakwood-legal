@@ -22,8 +22,15 @@ export default defineConfig({
               S,
               context,
             }),
+            orderableDocumentListDeskItem({
+              type: "members",
+              title: "Members",
+              S,
+              context,
+            }),
             ...S.documentTypeListItems().filter(
-              (item) => item.getId() !== "practiceAreas",
+              (item) =>
+                item.getId() !== "practiceAreas" && item.getId() !== "members",
             ),
           ]),
     }),
