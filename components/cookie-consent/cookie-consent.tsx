@@ -10,8 +10,13 @@ import CookieBanner from "./components/cookie-banner";
 import { logCookieConsent } from "@/app/actions/consent";
 
 import {
-    getCookieConsent,
+    applyGlobalPrivacyControl,
+    hasLoggedGlobalPrivacyControl,
     hasMarketingConsent,
+    isGlobalPrivacyControl,
+    markGlobalPrivacyControlLogged,
+    pushGoogleConsent,
+    readStoredCookieConsent,
     setCookieConsent,
     type ConsentAction,
     type CookiePreferences,
@@ -25,7 +30,40 @@ export default function CookieConsent() {
 
     useEffect(() => {
 
-        setPreferences(getCookieConsent());
+        const stored = readStoredCookieConsent();
+        const gpcEnabled = isGlobalPrivacyControl();
+        const resolved = applyGlobalPrivacyControl(stored, gpcEnabled);
+
+        if (gpcEnabled && stored?.marketing && !stored.explicitMarketing && resolved) {
+
+            setCookieConsent(resolved);
+
+            void logCookieConsent(
+                resolved,
+                "gpc",
+                window.location.href
+            );
+
+        } else if (gpcEnabled && !stored && !hasLoggedGlobalPrivacyControl()) {
+
+            markGlobalPrivacyControlLogged();
+
+            void logCookieConsent(
+                {
+                    necessary: true,
+                    measurement: false,
+                    marketing: false,
+                    explicitMarketing: false,
+                },
+                "gpc",
+                window.location.href
+            );
+
+        }
+
+        pushGoogleConsent(resolved);
+
+        setPreferences(resolved);
 
         setHasCheckedConsent(true);
 
@@ -37,7 +75,10 @@ export default function CookieConsent() {
             necessary: true,
             measurement: Boolean(nextPreferences.measurement),
             marketing: Boolean(nextPreferences.marketing),
+            explicitMarketing: Boolean(nextPreferences.marketing),
         };
+
+        pushGoogleConsent(savedPreferences);
 
         setCookieConsent(savedPreferences);
 

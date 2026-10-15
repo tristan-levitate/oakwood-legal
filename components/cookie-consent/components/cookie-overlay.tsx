@@ -69,6 +69,7 @@ export default function CookieOverlay({ isOpen, onClose, onConsentSave }: Cookie
             necessary: true,
             measurement: false,
             marketing: false,
+            explicitMarketing: false,
         }, "rejectAll");
 
         onClose();

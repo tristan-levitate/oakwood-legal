@@ -7,6 +7,8 @@ import { submitDataRequest } from "@/app/actions/data-request";
 import styles from "@/styles/components/do-not-sell/do-not-sell.module.css";
 import {
     getCookieConsent,
+    isGlobalPrivacyControl,
+    pushGoogleConsent,
     setCookieConsent,
 } from "@/utils/cookie-consent";
 
@@ -26,7 +28,7 @@ export default function DoNotSell() {
 
         const saved = getCookieConsent();
 
-        setOptedOut(saved ? saved.marketing === false : false);
+        setOptedOut(isGlobalPrivacyControl() || (saved ? saved.marketing === false : false));
 
     }, []);
 
@@ -39,7 +41,10 @@ export default function DoNotSell() {
             necessary: true,
             measurement: Boolean(current?.measurement),
             marketing: false,
+            explicitMarketing: false,
         };
+
+        pushGoogleConsent(savedPreferences);
 
         setCookieConsent(savedPreferences);
 

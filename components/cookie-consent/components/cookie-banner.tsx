@@ -22,6 +22,7 @@ export default function CookieBanner({ onConsentSave }: CookieBannerProps) {
             necessary: true,
             measurement: true,
             marketing: true,
+            explicitMarketing: true,
         }, "acceptAll");
 
     };

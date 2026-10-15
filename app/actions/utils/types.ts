@@ -35,7 +35,7 @@ export interface ICookieConsentLog {
   necessary: boolean;
   measurement: boolean;
   marketing: boolean;
-  action: "acceptAll" | "rejectAll" | "savePreferences" | "optOut";
+  action: "acceptAll" | "rejectAll" | "savePreferences" | "optOut" | "gpc";
   pageUrl: string;
   ip: string;
   userAgent: string;

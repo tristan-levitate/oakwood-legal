@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/globals/header/header";
 import Footer from "@/components/globals/footer/footer";
@@ -10,6 +12,7 @@ import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import { getPracticeAreaSubMenuData } from "@/utils/submenu-data";
 import type { PracticeAreaMenuItem } from "@/types/types";
+import { googleConsentDefaultScript } from "@/utils/cookie-consent";
 
 
 const helvetica = localFont({
@@ -93,6 +96,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headerList = await headers();
+  const gpcHeader = headerList.get("sec-gpc") === "1";
   let practiceAreaMenuItems: PracticeAreaMenuItem[] = [];
   try {
     practiceAreaMenuItems = await getPracticeAreaSubMenuData();
@@ -104,6 +109,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased @container font-sans ${helvetica.variable} ${neueMontreal.variable} ${inter.variable}`} style={{ overflowX: 'hidden' }}>
+        <Script id="google-consent-default" strategy="beforeInteractive">
+          {googleConsentDefaultScript(gpcHeader)}
+        </Script>
         <LoadingProvider>
           <LayoutWrapper header={<Header practiceAreaMenuItems={practiceAreaMenuItems} />} footer={<Footer />}>
             {children}
