@@ -99,10 +99,9 @@ function AwardsPaginatedCarousel({
           </div>
 
           {/* Page Numbers */}
-          <div 
+          <div
             className="flex items-center mx-1"
-            role="tablist"
-            aria-label="Page indicators"
+            aria-live="polite"
           >
             <span className="text-white font-neue-montreal text-[22px]">
               {String(currentPage + 1).padStart(2, '0')}/{String(totalPages).padStart(2, '0')}
@@ -573,19 +572,17 @@ export default function AwardsCarousel({ awards }: AwardsCarouselProps) {
           </div>
 
           {/* Carousel Indicators */}
-          <div 
+          <div
             className="flex items-center mx-1"
-            role="tablist"
-            aria-label="Carousel page indicators"
           >
             {showPageNumbers ? (
               // Show page numbers for layouts with 2 or fewer cards per page
-              <span className="text-white font-neue-montreal text-[22px]">
+              <span className="text-white font-neue-montreal text-[22px]" aria-live="polite">
                 {String(currentPage + 1).padStart(2, '0')}/{String(totalPages).padStart(2, '0')}
               </span>
             ) : (
               // Show dots for desktop (3 cards per page)
-              <div className="flex gap-0">
+              <div className="flex gap-0" role="tablist" aria-label="Carousel page indicators">
                 {Array.from({ length: totalPages }, (_, index) => (
                   <button
                     key={index}

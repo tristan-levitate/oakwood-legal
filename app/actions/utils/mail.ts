@@ -119,3 +119,46 @@ export async function sendClientConfirmationEmail(data: FormSubmissionData) {
     throw error;
   }
 }
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll("\"", "&quot;");
+}
+
+export async function sendDataRequestEmail(data: {
+  fullName: string;
+  email: string;
+  requestType: string;
+  message: string;
+  pageUrl: string;
+}) {
+  const { from } = getSmtpConfig();
+  const transporter = createTransporter();
+  const recipients = [
+    "info@oakwoodlegal.com",
+    "elan@oakwoodlegal.com",
+    "mike@oakwoodlegal.com",
+    "mckoy@oakwoodlegal.com",
+    "mario@oakwoodlegal.com",
+  ];
+
+  const html = [
+    "<p>A website visitor submitted a personal data request.</p>",
+    `<p><strong>Name:</strong> ${escapeHtml(data.fullName)}</p>`,
+    `<p><strong>Email:</strong> ${escapeHtml(data.email)}</p>`,
+    `<p><strong>Request:</strong> ${escapeHtml(data.requestType)}</p>`,
+    `<p><strong>Page:</strong> ${escapeHtml(data.pageUrl)}</p>`,
+    `<p><strong>Details:</strong><br/>${escapeHtml(data.message)}</p>`,
+  ].join("");
+
+  await transporter.sendMail({
+    from: `"Oakwood Legal Group" <${from}>`,
+    to: recipients.join(", "),
+    replyTo: data.email,
+    subject: `Data request | ${data.requestType} | ${data.fullName}`,
+    html,
+  });
+}

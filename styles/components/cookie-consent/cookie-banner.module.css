@@ -1,0 +1,81 @@
+.cookieBanner {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 99999;
+    max-width: none !important;
+    overflow: visible !important;
+}
+
+.cookieBannerContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: #140C0C;
+    color: #ffffff;
+    border: 1px solid rgba(192, 43, 39, 0.45);
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.45);
+    border-radius: 6px;
+    max-width: none !important;
+    overflow: visible !important;
+}
+
+.cookieBannerContainer p {
+    margin: 0;
+    color: #ffffff;
+    font-family: var(--font-neue-montreal), "Neue Montreal", sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    white-space: normal;
+}
+
+.cookieOverlayButtons {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.btnAccept,
+.btnManage {
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-family: var(--font-helvetica), "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btnAccept {
+    background: #C02B27;
+    color: #ffffff;
+    border: 1px solid #C02B27;
+}
+
+.btnAccept:hover {
+    background: #a82420;
+}
+
+.btnManage {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(142, 132, 132, 0.4);
+}
+
+.btnManage:hover {
+    border-color: #FF6460;
+    color: #FF6460;
+}
+
+@media (width >= 768px) {
+    .cookieBannerContainer {
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 56rem;
+        margin: 0 auto;
+    }
+}

@@ -127,7 +127,7 @@ export default function EmploymentLawLP() {
 
       {/* Nav — logo only (NOT a link to home), plus call CTA */}
       <nav className="nav" aria-label="Site header">
-        <span className="nav-logo" aria-label="Oakwood Legal Group">
+        <span className="nav-logo" role="img" aria-label="Oakwood Legal Group">
           <span className="nav-monogram" aria-hidden="true">OLG</span>
           <span className="nav-wordmark">
             <span className="nav-wordmark-top">OAKWOOD</span>
@@ -399,7 +399,7 @@ export default function EmploymentLawLP() {
           <h2 className="section-h2">What our former clients say</h2>
           <div className="testi-grid">
             <div className="testi-card">
-              <div className="stars" aria-label="5 stars">★★★★★</div>
+              <div className="stars" role="img" aria-label="5 stars">★★★★★</div>
               <p className="testi-quote">
                 &quot;I was afraid to come forward. Elan made the process clear
                 from day one and fought hard for me. I received a result I never
@@ -414,7 +414,7 @@ export default function EmploymentLawLP() {
               </div>
             </div>
             <div className="testi-card">
-              <div className="stars" aria-label="5 stars">★★★★★</div>
+              <div className="stars" role="img" aria-label="5 stars">★★★★★</div>
               <p className="testi-quote">
                 &quot;I was let go the week after I reported my manager. I
                 didn&apos;t think I had a case. Oakwood proved me wrong and
@@ -429,7 +429,7 @@ export default function EmploymentLawLP() {
               </div>
             </div>
             <div className="testi-card">
-              <div className="stars" aria-label="5 stars">★★★★★</div>
+              <div className="stars" role="img" aria-label="5 stars">★★★★★</div>
               <p className="testi-quote">
                 &quot;I had no idea I had a case until I called. Elan walked me
                 through everything and got me a settlement I never expected.
@@ -618,7 +618,7 @@ export default function EmploymentLawLP() {
             <div className="field form-full">
               <label htmlFor="f-desc">
                 Briefly describe what happened{" "}
-                <span style={{ color: "rgba(255,255,255,0.28)", fontWeight: 400 }}>
+                <span className="field-optional">
                   (optional)
                 </span>
               </label>
@@ -676,6 +676,9 @@ export default function EmploymentLawLP() {
             outcomes. Results may vary based on your particular facts and legal
             circumstances.
           </p>
+          <a className="footer-opt-out" href="/do-not-sell">
+            Do Not Sell or Share My Personal Information
+          </a>
         </div>
       </footer>
     </div>

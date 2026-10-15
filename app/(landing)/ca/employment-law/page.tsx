@@ -4,10 +4,10 @@ import "./lp.css";
 
 // PPC landing page — fully self-contained, no Sanity, no shared header/footer.
 // Lives at /ca/employment-law. Indexing disabled (paid-traffic page).
-// NOTE: GTM (GTM-WDRL3HS4) is installed site-wide in app/layout.tsx, so it is
-// intentionally NOT duplicated here. This keeps the dataLayer continuous when a
-// PPC visitor clicks from this LP through to the main firm site, while avoiding
-// loading the container twice on this page.
+// NOTE: GTM (GTM-WDRL3HS4) loads from the sitewide cookie consent component
+// after marketing consent, so it is intentionally NOT duplicated here. This
+// keeps the dataLayer continuous when a PPC visitor clicks from this LP
+// through to the main firm site, while avoiding loading the container twice.
 export const metadata: Metadata = {
   title:
     "Los Angeles Employment Attorney | Sexual Harassment & Wrongful Termination Lawyer | Oakwood Legal Group",

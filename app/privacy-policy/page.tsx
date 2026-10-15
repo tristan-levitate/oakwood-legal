@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <main>
+    <main style={{ position: 'relative', zIndex: 1 }}>
       <PrivacyPolicyHero />
       <PrivacyPolicyContent />
     </main>

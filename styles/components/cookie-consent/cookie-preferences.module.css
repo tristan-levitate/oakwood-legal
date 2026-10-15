@@ -1,0 +1,181 @@
+.cookiePreferences {
+    width: min(32rem, calc(100vw - 2rem));
+    max-width: calc(100vw - 2rem) !important;
+    max-height: calc(100vh - 2rem);
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    overflow: visible;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    margin: auto;
+}
+
+.cookiePreferences::backdrop {
+    background: rgba(20, 12, 12, 0.72);
+}
+
+.cookiePreferencesContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #140C0C;
+    color: #ffffff;
+    border: 1px solid rgba(192, 43, 39, 0.45);
+    border-radius: 6px;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.45);
+}
+
+.cookiePreferencesHeader {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.cookiePreferencesHeader h2 {
+    margin: 0;
+    color: #ffffff;
+    font-family: var(--font-helvetica), "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    white-space: normal;
+}
+
+.cookiePreferencesClose {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.cookiePreferencesClose svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.cookieItemContent {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.25rem;
+}
+
+.cookieItem {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem 1rem;
+}
+
+.cookieItem h3 {
+    margin: 0;
+    grid-column: 1;
+    color: #ffffff;
+    font-family: var(--font-helvetica), "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    white-space: normal;
+}
+
+.cookieItem p {
+    margin: 0;
+    grid-column: 1;
+    color: #C7C7C7;
+    font-family: var(--font-neue-montreal), "Neue Montreal", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: normal;
+}
+
+.cookieItemToggle {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+}
+
+.cookieItemToggle input {
+    appearance: none;
+    width: 2.75rem;
+    height: 1.5rem;
+    margin: 0;
+    border-radius: 999px;
+    background: #3a2a2a;
+    border: 1px solid rgba(142, 132, 132, 0.4);
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s ease;
+}
+
+.cookieItemToggle input::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    background: #ffffff;
+    transition: transform 0.2s ease;
+}
+
+.cookieItemToggle input:checked {
+    background: #C02B27;
+    border-color: #C02B27;
+}
+
+.cookieItemToggle input:checked::after {
+    transform: translateX(1.2rem);
+}
+
+.cookieItemToggle input:disabled {
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+.buttons {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.75rem;
+}
+
+.save,
+.reject {
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-family: var(--font-helvetica), "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.save {
+    background: #C02B27;
+    color: #ffffff;
+    border: 1px solid #C02B27;
+}
+
+.save:hover {
+    background: #a82420;
+}
+
+.reject {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(142, 132, 132, 0.4);
+}
+
+.reject:hover {
+    border-color: #FF6460;
+    color: #FF6460;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface CustomCheckboxProps {
@@ -17,6 +17,8 @@ export default function CustomCheckbox({
     formState: { errors },
   } = useFormContext();
 
+  const fieldId = useId();
+  const errorId = `${fieldId}-error`;
   const hasError = errors[name];
 
   return (
@@ -25,7 +27,9 @@ export default function CustomCheckbox({
         <input
           {...register(name)}
           type="checkbox"
-          id={name}
+          id={fieldId}
+          aria-invalid={hasError ? true : undefined}
+          aria-describedby={hasError ? errorId : undefined}
           className="w-3 h-3 cursor-pointer appearance-none border-2 border-[rgba(255,255,255,0.7)] checked:border-[#FF6460] bg-transparent focus:outline-none relative peer"
           style={{
             backgroundImage: 'none'
@@ -47,14 +51,14 @@ export default function CustomCheckbox({
         </svg>
       </div>
       <label 
-        htmlFor={name} 
+        htmlFor={fieldId} 
         className="text-sm mt-1 cursor-pointer text-white font-helvetica"
       >
         {label}
       </label>
        {/* Error Message */}
        {hasError && (
-         <p className="absolute left-0 top-full text-red-500 text-sm mt-1 z-20 px-1">
+         <p id={errorId} role="alert" className="absolute left-0 top-full text-red-500 text-sm mt-1 z-20 px-1">
            {hasError.message as string}
          </p>
        )}

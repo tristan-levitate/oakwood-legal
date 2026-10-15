@@ -1,11 +1,14 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
-import { FormSubmissionData, INewsletterData } from "./types";
+import { FormSubmissionData, ICookieConsentLog, IDataRequestLog, INewsletterConsentLog, INewsletterData } from "./types";
 
 const uri = process.env.MONGODB_URI;
 
 type CollectionMapping = {
   "form-submissions": FormSubmissionData;
   "constant-contact-newsletters": INewsletterData;
+  "cookie-consent": ICookieConsentLog;
+  "newsletter-consent": INewsletterConsentLog;
+  "data-requests": IDataRequestLog;
 };
 
 async function MongoDB<T extends keyof CollectionMapping>(

@@ -20,6 +20,39 @@ export interface INewsletterData {
   subscriberEmail?: string;
 }
 
+export interface INewsletterConsentLog {
+  subscribed: boolean;
+  formName: "contact" | "squeeze" | "footer";
+  email: string;
+  name: string;
+  pageUrl: string;
+  ip: string;
+  userAgent: string;
+  consentedAt: Date;
+}
+
+export interface ICookieConsentLog {
+  necessary: boolean;
+  measurement: boolean;
+  marketing: boolean;
+  action: "acceptAll" | "rejectAll" | "savePreferences" | "optOut";
+  pageUrl: string;
+  ip: string;
+  userAgent: string;
+  consentedAt: Date;
+}
+
+export interface IDataRequestLog {
+  fullName: string;
+  email: string;
+  requestType: "access" | "delete" | "correct";
+  message: string;
+  pageUrl: string;
+  ip: string;
+  userAgent: string;
+  requestedAt: Date;
+}
+
 export interface ILeadDocketPayload {
   fullName: string;
   email: string;

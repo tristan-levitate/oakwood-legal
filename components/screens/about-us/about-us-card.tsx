@@ -77,15 +77,6 @@ export default function AboutUsCard({ members }: AboutUsCardProps) {
         e.currentTarget.style.background = 'linear-gradient(150deg, rgba(142, 132, 132, 0.10) 7.84%, rgba(20, 12, 12, 0.10) 63.62%), rgba(255, 255, 255, 0.05)';
       }}
       onClick={() => handleMemberClick(member)}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleMemberClick(member);
-        }
-      }}
-      aria-label={`View details for ${member.name}, ${member.position}`}
     >
       <article className="h-full flex flex-col gap-4">
         {/* Team Member Photo */}

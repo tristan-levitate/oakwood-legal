@@ -117,7 +117,13 @@ export default function PrivacyPolicyContent() {
                                 <li>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</li>
                             </ul>
                             <p>
-                                If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.
+                                If you make a request, we have one month to respond to you. Use our
+                                {" "}
+                                <a href="/do-not-sell" className="text-[#FF6460] underline">
+                                    Do Not Sell or Share My Personal Information
+                                </a>
+                                {" "}
+                                page to opt out of advertising cookies and to request access, correction, or deletion. You can also email info@oakwoodlegal.com.
                             </p>
                         </section>
 
@@ -135,7 +141,13 @@ export default function PrivacyPolicyContent() {
                                 <li><strong>The right to data portability</strong> – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</li>
                             </ul>
                             <p>
-                                If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.
+                                If you make a request, we have one month to respond to you. Submit it on our
+                                {" "}
+                                <a href="/do-not-sell" className="text-[#FF6460] underline">
+                                    Do Not Sell or Share My Personal Information
+                                </a>
+                                {" "}
+                                page, or email info@oakwoodlegal.com.
                             </p>
                         </section>
 

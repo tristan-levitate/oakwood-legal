@@ -301,6 +301,7 @@ export default function HistoricWins({ results }: HistoricWinsProps) {
                                             <div
                                                 key={`${result._id}-${index}`}
                                                 data-carousel="true"
+                                                aria-hidden={index >= results.length ? true : undefined}
                                                 className="flex-shrink-0 mx-4 flex flex-col items-start justify-start h-[330px] max-[815px]:h-[400px]"
                                             >
                                                 <article 

@@ -131,6 +131,14 @@ export default function FooterMobile() {
                     Disclaimer
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/do-not-sell"
+                    className="text-[#C7C7C7] text-base hover:text-white transition-colors duration-200"
+                  >
+                    Do Not Sell or Share My Personal Information
+                  </Link>
+                </li>
               </ul>
             </nav>
           </section>

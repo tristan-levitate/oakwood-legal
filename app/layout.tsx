@@ -5,7 +5,7 @@ import Footer from "@/components/globals/footer/footer";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { LoadingProvider } from "@/components/globals/loading-context/loading-context";
 import { Tracking } from "@/components/Tracking";
-import { GTMHead, GTMNoScript } from "@/components/GTM";
+import CookieConsent from "@/components/cookie-consent/cookie-consent";
 import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import { getPracticeAreaSubMenuData } from "@/utils/submenu-data";
@@ -103,33 +103,14 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <Tracking.OpenAI />
-        <GTMHead />
-      </head>
-      <body className={`antialiased @container font-sans ${helvetica.variable} ${neueMontreal.variable} ${inter.variable}`} style={{overflowX: 'hidden'}}>
-        <GTMNoScript />
+      <body className={`antialiased @container font-sans ${helvetica.variable} ${neueMontreal.variable} ${inter.variable}`} style={{ overflowX: 'hidden' }}>
         <LoadingProvider>
           <LayoutWrapper header={<Header practiceAreaMenuItems={practiceAreaMenuItems} />} footer={<Footer />}>
-  {children}
-</LayoutWrapper>
+            {children}
+          </LayoutWrapper>
         </LoadingProvider>
-        {process.env.NEXT_PUBLIC_GA4_ID && (
-          <Tracking.GA4 GA4_ID={process.env.NEXT_PUBLIC_GA4_ID} />
-        )}
-        {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
-          <Tracking.Meta
-            META_PIXEL_ID={process.env.NEXT_PUBLIC_META_PIXEL_ID}
-          />
-        )}
-        {process.env.NEXT_PUBLIC_CALL_RAIL_SRC && (
-          <Tracking.CallRail
-            CALL_RAIL_SRC={process.env.NEXT_PUBLIC_CALL_RAIL_SRC}
-          />
-        )}
         {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && <Tracking.ReCaptchaV3 />}
-        <Tracking.VercelInsights />
-        <Tracking.VercelAnalytics />
+        <CookieConsent />
       </body>
     </html>
   );

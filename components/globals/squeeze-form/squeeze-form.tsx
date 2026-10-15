@@ -80,7 +80,8 @@ export default function SqueezeForm({ videos }: SqueezeFormProps) {
                 data,
                 "Oakwood Legal Group - Squeeze Page Form",
                 token,
-                clientInfo
+                clientInfo,
+                true
             );
 
             if (result.email?.status === "sent") {

@@ -1,4 +1,5 @@
-import Script from "next/script";
+// next/script not running in this file. Nothing imports TrackingScripts, and the loaders below return nothing.
+// import Script from "next/script";
 
 /**
  * ▗▄▄▄  ▗▄▖▗▄▄▄▖    ▗▄▄▄▖▗▖  ▗▖▗▖  ▗▖
@@ -31,11 +32,10 @@ interface CallRailProps {
 }
 
 export function CallRail({ CALL_RAIL_SRC }: CallRailProps) {
-  if (!CALL_RAIL_SRC) return null;
-  
-  return (
-    <Script type="text/javascript" src={CALL_RAIL_SRC} />
-  );
+  // CallRail script not running. This file is unused, and NEXT_PUBLIC_CALL_RAIL_SRC is not set in production. CallRail swap.js is loaded by the GTM container instead.
+  void CALL_RAIL_SRC;
+
+  return null;
 }
 
 interface GA4Props {
@@ -43,25 +43,10 @@ interface GA4Props {
 }
 
 export function GA4({ GA4_ID }: GA4Props) {
-  if (!GA4_ID) return null;
-  
-  return (
-    <>
-      <Script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
-      />
-      <Script id="ga4-analytics">
-        {` 
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+  // GA4 not running. This file is unused, and NEXT_PUBLIC_GA4_ID is not set in production. The Google tag is loaded by the GTM container instead.
+  void GA4_ID;
 
-            gtag('config', '${GA4_ID}');
-            `}
-      </Script>
-    </>
-  );
+  return null;
 }
 
 interface MetaPixelProps {
@@ -69,34 +54,10 @@ interface MetaPixelProps {
 }
 
 export function Meta({ META_PIXEL_ID }: MetaPixelProps) {
-  if (!META_PIXEL_ID) return null;
-  
-  return (
-    <>
-      <Script id="Meta-Pixel">
-        {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${META_PIXEL_ID}');
-            fbq('track', 'PageView');`}
-      </Script>
+  // Meta Pixel not running. This file is unused, and NEXT_PUBLIC_META_PIXEL_ID is not set in production. The GTM container has no Meta tag.
+  void META_PIXEL_ID;
 
-      <noscript>
-        <img
-          height="1"
-          width="1"
-          style={{ display: "none" }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-        />
-      </noscript>
-    </>
-  );
+  return null;
 }
 
 export const TrackingScripts = {

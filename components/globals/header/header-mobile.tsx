@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -20,6 +20,9 @@ interface HeaderMobileProps {
 export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPracticeAreasOpen, setIsPracticeAreasOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const menuWasOpen = useRef(false);
   const pathname = usePathname();
   const normalizedPath = pathname.replace(/^\/+|\/+$/g, "");
   const isPracticeAreaDetailPage = practiceAreaMenuItems.some((item) => item.slug === normalizedPath);
@@ -41,6 +44,46 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
     return () => {
       document.body.style.overflow = 'unset';
     };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+
+    if (isMenuOpen) {
+
+      closeButtonRef.current?.focus();
+
+    } else if (menuWasOpen.current) {
+
+      menuButtonRef.current?.focus();
+
+    }
+
+    menuWasOpen.current = isMenuOpen;
+
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+
+    if (!isMenuOpen) {
+
+      return;
+
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+
+      if (event.key === "Escape") {
+
+        setIsMenuOpen(false);
+
+      }
+
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => document.removeEventListener("keydown", onKeyDown);
+
   }, [isMenuOpen]);
 
   // Close menu when pathname changes
@@ -83,7 +126,7 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
           </button>
 
           {/* Logo - Center aligned above 825px, left aligned below 825px */}
-          <Link href="/" className="flex items-center min-[825px]:absolute min-[825px]:left-1/2 min-[825px]:transform min-[825px]:-translate-x-1/2">
+          <Link href="/" aria-label="Oakwood Legal Group - Home" className="flex items-center min-[825px]:absolute min-[825px]:left-1/2 min-[825px]:transform min-[825px]:-translate-x-1/2">
             <OakwoodLogo
               width={200}
               height={60}
@@ -93,7 +136,11 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
 
           {/* Hamburger Menu Button - Right side */}
           <button
+            ref={menuButtonRef}
+            type="button"
             onClick={toggleMenu}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
             className="flex items-center justify-center w-10 h-10 rounded-md hover:bg-white/10 transition-colors duration-200 z-10"
           >
             {isMenuOpen ? (
@@ -154,6 +201,7 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
             <Link
               href="https://facebook.com/oakwoodlegal"
               target="_blank"
+              aria-label="Follow Oakwood Legal Group on Facebook"
               className="hover:opacity-80 transition-opacity duration-200"
             >
               <IconWithCircle>
@@ -165,6 +213,7 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
             <Link
               href="https://linkedin.com/company/oakwoodlegal"
               target="_blank"
+              aria-label="Follow Oakwood Legal Group on LinkedIn"
               className="hidden min-[500px]:block hover:opacity-80 transition-opacity duration-200"
             >
               <IconWithCircle>
@@ -176,6 +225,7 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
             <Link
               href="https://instagram.com/oakwoodlegal"
               target="_blank"
+              aria-label="Follow Oakwood Legal Group on Instagram"
               className="hover:opacity-80 transition-opacity duration-200"
             >
               <IconWithCircle>
@@ -186,7 +236,10 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
         </div>
 
         {/* Mobile Menu - Fullscreen */}
-        <div className={`fixed inset-0 bg-[#140C0C]/95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out z-[9999] overflow-y-auto ${
+        <div
+          inert={!isMenuOpen}
+          aria-hidden={!isMenuOpen}
+          className={`fixed inset-0 bg-[#140C0C]/95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out z-[9999] overflow-y-auto ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
           <div className="flex flex-col min-h-full">
@@ -200,7 +253,10 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
                 className="h-auto w-[200px]"
               />
               <button
+                ref={closeButtonRef}
+                type="button"
                 onClick={toggleMenu}
+                aria-label="Close menu"
                 className="flex items-center justify-center w-10 h-10 rounded-md hover:bg-white/10 transition-colors duration-200"
               >
                 <FaXmark className="text-white text-2xl" />
@@ -270,7 +326,7 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
                       isPracticeAreasOpen ? "grid-rows-[1fr] pb-3" : "grid-rows-[0fr]"
                     }`}
                   >
-                    <div className="overflow-hidden">
+                    <div className="overflow-hidden" inert={isPracticeAreasOpen ? undefined : true}>
                       <div className="pl-10 pr-4 space-y-2">
                         {practiceAreaMenuItems.map((item) => {
                           const href = `/${item.slug}`;
@@ -395,6 +451,7 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
                   href="https://www.facebook.com/oakwoodlegalgroup/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Follow Oakwood Legal Group on Facebook"
                   className="hover:opacity-80 transition-opacity duration-200"
                 >
                   <IconWithCircle size="large">
@@ -406,6 +463,7 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
                   href="https://www.linkedin.com/company/oakwood-legal-group/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Follow Oakwood Legal Group on LinkedIn"
                   className="hover:opacity-80 transition-opacity duration-200"
                 >
                   <IconWithCircle size="large">
@@ -417,6 +475,7 @@ export default function HeaderMobile({ practiceAreaMenuItems }: HeaderMobileProp
                   href="https://www.instagram.com/oakwoodlegalgroup/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Follow Oakwood Legal Group on Instagram"
                   className="hover:opacity-80 transition-opacity duration-200"
                 >
                   <IconWithCircle size="large">

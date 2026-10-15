@@ -69,21 +69,11 @@ export default function ContentCardItem({
       <article>
         <div
           onClick={handleCardClick}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              handleCardClick();
-            }
-          }}
           className={`${config.cardWidth} ${config.cardHeight} px-4 pt-4 pb-6 max-[530px]:px-3 max-[530px]:pt-3 max-[530px]:pb-4 bg-transparent border-b border-[#4E4E4E] transition-all duration-300 block w-full text-left relative ${
             isAnyCardDisabled 
               ? 'pointer-events-none opacity-50 cursor-not-allowed' 
               : 'cursor-pointer hover:bg-[rgba(255,255,255,0.05)] hover:border-b-[#FF6460]'
           }`}
-          aria-label={getAriaLabel(page, item.title, isExternalLink)}
-          aria-disabled={isAnyCardDisabled}
-          role="button"
-          tabIndex={isAnyCardDisabled ? -1 : 0}
         >
           {/* Card Content */}
           <div className="h-full flex flex-col justify-between">
@@ -120,6 +110,7 @@ export default function ContentCardItem({
               <button
                 className="bg-transparent cursor-pointer text-white font-normal font-helvetica text-[14px] max-[530px]:text-[12px] py-1 px-3 max-[530px]:py-1 max-[530px]:px-2 rounded-[6px] border border-[#FF503C] hover:bg-[rgba(255,80,60,0.1)] transition-colors duration-200 flex items-center gap-2"
                 type="button"
+                aria-label={getAriaLabel(page, item.title, isExternalLink)}
                 onClick={(event) => {
                   event.stopPropagation();
                   handleCardClick();

@@ -66,7 +66,8 @@ export default function ContactFormMobile() {
         data,
         "Oakwood Legal Group - Form Submission",
         token,
-        clientInfo
+        clientInfo,
+        true
       );
 
       if (result.email?.status === "sent") {

@@ -105,7 +105,7 @@ p, h1, h2, h3, h4, h5, h6, span, a, div, li, td, th {
 /* Prevent horizontal overflow for tablet and mobile */
 @media (max-width: 1599px) {
   html, body {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
   }
   
   /* Prevent any component from causing horizontal scroll */
@@ -115,14 +115,14 @@ p, h1, h2, h3, h4, h5, h6, span, a, div, li, td, th {
   
   /* Hide overflow on main containers */
   body > div {
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 }
 
 /* Extra aggressive horizontal scroll prevention for mobile */
 @media (max-width: 559px) {
   html, body {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     max-width: 100vw !important;
     position: relative;
   }
@@ -150,7 +150,7 @@ p, h1, h2, h3, h4, h5, h6, span, a, div, li, td, th {
   ul:not([data-carousel]):not([data-carousel] *), 
   ol:not([data-carousel]):not([data-carousel] *), 
   li:not([data-carousel]):not([data-carousel] *) {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     max-width: 100vw !important;
   }
   
@@ -160,8 +160,17 @@ p, h1, h2, h3, h4, h5, h6, span, a, div, li, td, th {
   [class*="min-w-"]:not([data-carousel]):not([data-carousel] *), 
   [class*="width"]:not([data-carousel]):not([data-carousel] *), 
   [class*="container"]:not([data-carousel]):not([data-carousel] *) {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     max-width: 100vw !important;
+  }
+
+  p[class*="max-w-"],
+  h1[class*="max-w-"],
+  h2[class*="max-w-"],
+  h3[class*="max-w-"],
+  span[class*="max-w-"] {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
   }
   
   /* Ensure images and media don't cause overflow */
@@ -193,18 +202,17 @@ p, h1, h2, h3, h4, h5, h6, span, a, div, li, td, th {
   [class*="container"]:not([data-carousel]):not([data-carousel] *), 
   [class*="wrapper"]:not([data-carousel]):not([data-carousel] *), 
   [class*="layout"]:not([data-carousel]):not([data-carousel] *) {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     max-width: 100vw !important;
   }
   
   /* Carousel specific rules - allow overflow for carousel functionality */
   [data-carousel="true"] {
-    overflow-x: visible !important;
+    overflow: hidden !important;
     max-width: none !important;
   }
-  
+
   [data-carousel="true"] * {
-    overflow-x: visible !important;
     max-width: none !important;
   }
 }
@@ -290,4 +298,16 @@ textarea:-webkit-autofill::first-line {
 /* Hide reCAPTCHA widget */
 .grecaptcha-badge {
   visibility: hidden !important;
+}
+
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+summary:focus,
+[role="button"]:focus,
+[role="tab"]:focus {
+  outline: 2px solid #FF6460 !important;
+  outline-offset: 3px !important;
 }

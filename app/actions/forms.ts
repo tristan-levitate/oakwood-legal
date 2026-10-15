@@ -2,11 +2,12 @@
 
 import { IContactForm } from "@/components/globals/contact-us/form/contact-form";
 import { IClientInfo } from "../../utils/useGetClientInfo";
-import Conversions_API_Meta from "./utils/Conversions_API_Meta";
+// Meta Conversions API not running. See the commented call below.
 import LeadDocket from "./utils/LeadDocket";
 import MongoDB from "./utils/MongoDB";
 import { sendClientConfirmationEmail, sendLeadEmail } from "./utils/mail";
 import { ILeadDocketPayload } from "./utils/types";
+import { logNewsletterConsent } from "./consent";
 
 function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message;
@@ -63,7 +64,8 @@ export async function submitForm(
   data: IContactForm,
   event_name: string,
   token: string,
-  clientInfo: IClientInfo
+  clientInfo: IClientInfo,
+  recordNewsletterChoice = false
 ) {
   const { score } = await getReCaptchaScore(token);
 
@@ -107,11 +109,27 @@ export async function submitForm(
     marketingSourceDetails: utmDetails,
   };
 
+  // Meta Conversions API not running. Every live form uses an event name this call used to skip, and NEXT_PUBLIC_META_PIXEL_ID is not set in production, so there is no Meta dataset to send to.
+  const conversionsPromise = Promise.resolve();
+  /*
   const conversionsPromise =
     event_name === "Oakwood Legal Group - Form Submission" ||
     event_name === "Oakwood Legal Group - Squeeze Page Form"
       ? Promise.resolve()
       : Conversions_API_Meta(formData, event_name);
+  */
+
+  if (recordNewsletterChoice) {
+    const formName = event_name === "Oakwood Legal Group - Squeeze Page Form" ? "squeeze" : "contact";
+
+    await logNewsletterConsent({
+      subscribed: Boolean(data.newsletter),
+      formName,
+      email,
+      name: fullName,
+      pageUrl: clientInfo.locationHref,
+    });
+  }
 
   try {
     const settled = await Promise.allSettled([

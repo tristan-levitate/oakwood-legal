@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface SqueezeCheckboxProps {
@@ -17,6 +17,8 @@ export default function SqueezeCheckbox({
     formState: { errors },
   } = useFormContext();
 
+  const fieldId = useId();
+  const errorId = `${fieldId}-error`;
   const hasError = errors[name];
 
   return (
@@ -26,7 +28,9 @@ export default function SqueezeCheckbox({
           <input
             {...register(name)}
             type="checkbox"
-            id={name}
+            id={fieldId}
+            aria-invalid={hasError ? true : undefined}
+            aria-describedby={hasError ? errorId : undefined}
             className="w-4 h-4 cursor-pointer appearance-none border border-[rgba(255,255,255,1)] checked:border-[#C02B27] bg-transparent focus:outline-none focus:border-[#C02B27] relative peer rounded-sm transition-all duration-200"
             style={{
               backgroundImage: 'none'
@@ -48,7 +52,7 @@ export default function SqueezeCheckbox({
           </svg>
         </div>
         <label 
-          htmlFor={name} 
+          htmlFor={fieldId} 
           className="text-[14px] mt-1 max-[421px]:-mt-1 max-[421px]:ml-1 cursor-pointer text-[#C7C7C7] font-neue-montreal leading-[1.4] flex-1"
         >
           {label}
@@ -56,7 +60,7 @@ export default function SqueezeCheckbox({
       </div>
       {/* Error Message */}
       {hasError && (
-        <p className="absolute left-0 top-full text-red-500 text-xs mt-1 z-20">
+        <p id={errorId} role="alert" className="absolute left-0 top-full text-red-500 text-xs mt-1 z-20">
           {hasError.message as string}
         </p>
       )}

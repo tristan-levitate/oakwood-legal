@@ -2,7 +2,8 @@ import React from "react";
 import Script from "next/script";
 import { SpeedInsights as VercelInsights } from "@vercel/speed-insights/next";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
-import va from "@vercel/analytics";
+// @vercel/analytics track helper not running. submitConversionTracking, the only caller, is commented out below.
+// import va from "@vercel/analytics";
 
 /**
  * ▗▄▄▄  ▗▄▖▗▄▄▄▖    ▗▄▄▄▖▗▖  ▗▖▗▖  ▗▖
@@ -85,11 +86,18 @@ interface CallRailProps {
 }
 
 function CallRail({ CALL_RAIL_SRC }: CallRailProps) {
+  // CallRail script not running. NEXT_PUBLIC_CALL_RAIL_SRC is not set in production. CallRail swap.js is loaded by the GTM container instead.
+  void CALL_RAIL_SRC;
+
+  return null;
+
+  /*
   return (
     <>
       <Script type="text/javascript" src={CALL_RAIL_SRC} />
     </>
   );
+  */
 }
 
 interface GA4Props {
@@ -97,6 +105,12 @@ interface GA4Props {
 }
 
 function GA4({ GA4_ID }: GA4Props) {
+  // GA4 not running. NEXT_PUBLIC_GA4_ID is not set in production. The Google tag is loaded by the GTM container instead.
+  void GA4_ID;
+
+  return null;
+
+  /*
   return (
     <>
       <Script
@@ -104,7 +118,7 @@ function GA4({ GA4_ID }: GA4Props) {
         src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
       />
       <Script id="ga4-analytics">
-        {` 
+        {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -114,6 +128,7 @@ function GA4({ GA4_ID }: GA4Props) {
       </Script>
     </>
   );
+  */
 }
 
 interface MetaPixelProps {
@@ -121,6 +136,12 @@ interface MetaPixelProps {
 }
 
 function Meta({ META_PIXEL_ID }: MetaPixelProps) {
+  // Meta Pixel not running. NEXT_PUBLIC_META_PIXEL_ID is not set in production, and the GTM container has no Meta tag.
+  void META_PIXEL_ID;
+
+  return null;
+
+  /*
   return (
     <>
       <Script id="Meta-Pixel">
@@ -147,6 +168,7 @@ function Meta({ META_PIXEL_ID }: MetaPixelProps) {
       </noscript>
     </>
   );
+  */
 }
 
 interface OpenAIPixelProps {
@@ -158,7 +180,7 @@ function OpenAI({
   PIXEL_ID = process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID || "PH4CAe2CmrYUTh9Fvy6grh",
 }: OpenAIPixelProps) {
   return (
-    <Script id="openai-ads-pixel" strategy="beforeInteractive">
+    <Script id="openai-ads-pixel" strategy="afterInteractive">
       {`(function (w, d, s, u) {
   if (w.oaiq) return;
   var q = function () { q.q.push(arguments); };
@@ -204,13 +226,17 @@ export function submitConversionTracking(
   eventName: string,
   eventId: string
 ) {
-  // Google (GA4) Tracking
+  // submitConversionTracking not running. Nothing on the site calls it, and the GA4 and Meta scripts it would ping are not loaded in production.
+  void data;
+  void eventName;
+  void eventId;
+
+  /*
   if (window.gtag) {
     console.log("Fired GTAG");
     window.gtag("event", eventName, { ...data });
   }
 
-  // Meta Facebook Tracking
   if (window.fbq) {
     console.log("Fired FBQ");
     window.fbq(
@@ -223,11 +249,11 @@ export function submitConversionTracking(
     );
   }
 
-  // Vercel Analytics
   if (va) {
     console.log("Fired VA_TRACK");
     va.track(eventName, { ...data });
   }
+  */
 }
 
 export const Tracking = {

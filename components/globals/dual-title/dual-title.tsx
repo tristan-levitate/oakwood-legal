@@ -64,7 +64,7 @@ export default function DualTitle({ titleWhite, titleRed, message, page }: DualT
                 </span>
               </h1>
             </hgroup>
-            <p className="text-[#C7C7C7] text-[18px] leading-[1.1] max-w-[322px] hidden xl:block">
+            <p className="text-[#C7C7C7] text-[18px] leading-[1.1] hidden xl:block" style={{ maxWidth: "322px" }}>
               <span className="font-medium">Attorney advertisement:</span> Past results are not a guarantee of future outcomes.
             </p>
           </header>
@@ -109,7 +109,7 @@ export default function DualTitle({ titleWhite, titleRed, message, page }: DualT
               </div>
             </aside>
           )}
-          <p className="font-neue-montreal text-[16px] leading-[1.1] text-[#C7C7C7] text-left max-w-[322px] block xl:hidden mb-4">
+          <p className="font-neue-montreal text-[16px] leading-[1.1] text-[#C7C7C7] text-left block xl:hidden mb-4" style={{ maxWidth: "322px" }}>
               <span className="font-medium">Attorney advertisement:</span> Past results are not a guarantee of future outcomes.
             </p>
         </div>

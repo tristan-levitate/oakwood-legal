@@ -1,16 +1,18 @@
 import Script from "next/script";
 
 // Single source of truth for the Oakwood Legal Group GTM container.
-// Installed once in the root layout so it loads on EVERY page (main site
-// + landing pages). This is what carries PPC attribution across page
-// navigations — e.g. a visitor who lands on /ca/employment-law and then
-// clicks through to /practice-areas keeps the same dataLayer + cookies.
+// Loaded from the cookie consent component only after marketing consent,
+// on every page (main site + landing pages). This is what carries PPC
+// attribution across page navigations — e.g. a visitor who lands on
+// /ca/employment-law and then clicks through to /practice-areas keeps
+// the same dataLayer + cookies.
 export const GTM_ID = "GTM-WDRL3HS4";
 
-// Place in <head>, as high as possible.
+// Injected after marketing consent. afterInteractive is required because
+// this script is mounted from a client component, not the root layout head.
 export function GTMHead() {
   return (
-    <Script id="gtm-head" strategy="beforeInteractive">
+    <Script id="gtm-head" strategy="afterInteractive">
       {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -20,8 +22,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   );
 }
 
-// Place immediately after the opening <body> tag (fallback for no-JS).
+// GTM noscript iframe not running. It is not mounted anywhere, because that iframe would load GTM before marketing consent.
 export function GTMNoScript() {
+  return null;
+
+  /*
   return (
     <noscript>
       <iframe
@@ -32,4 +37,5 @@ export function GTMNoScript() {
       />
     </noscript>
   );
+  */
 }

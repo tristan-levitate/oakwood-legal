@@ -66,7 +66,8 @@ export default function ContactForm() {
         data,
         "Oakwood Legal Group - Form Submission",
         token,
-        clientInfo
+        clientInfo,
+        true
       );
 
       if (result.email?.status === "sent") {

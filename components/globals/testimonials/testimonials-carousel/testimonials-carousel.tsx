@@ -383,15 +383,16 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
         </div>
 
         {/* Page Indicators */}
-        <div className="flex gap-0 mx-1" role="tablist" aria-label="Testimonials page indicators">
+        <div className="flex gap-0 mx-1">
           {showPageNumbers ? (
             // Show page numbers for layouts with 2 or fewer cards per page
-            <span className="text-white font-neue-montreal text-[22px]">
+            <span className="text-white font-neue-montreal text-[22px]" aria-live="polite">
               {String(Math.floor(currentIndex / cardsPerPage) + 1).padStart(2, '0')}/{String(maxPages).padStart(2, '0')}
             </span>
           ) : (
             // Show dots for layouts with 3 or more cards per page
-            Array.from({ length: maxPages }, (_, index) => (
+            <div className="flex gap-0" role="tablist" aria-label="Testimonials page indicators">
+            {Array.from({ length: maxPages }, (_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index * cardsPerPage)}
@@ -414,7 +415,8 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
                   aria-hidden="true" 
                 />
               </button>
-            ))
+            ))}
+            </div>
           )}
         </div>
 

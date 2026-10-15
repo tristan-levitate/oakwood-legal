@@ -171,6 +171,9 @@ export default function ThankYouPage() {
             outcomes. Results may vary based on your particular facts and legal
             circumstances.
           </p>
+          <a className="footer-opt-out" href="/do-not-sell">
+            Do Not Sell or Share My Personal Information
+          </a>
         </div>
       </footer>
     </div>

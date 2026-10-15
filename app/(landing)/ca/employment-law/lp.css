@@ -26,7 +26,7 @@
 
   .lp-root .sticky-call-text { display: flex; flex-direction: column; align-items: flex-start; }
 
-  .lp-root .sticky-call-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.75); line-height: 1; }
+  .lp-root .sticky-call-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #ffffff; line-height: 1; }
 
   .lp-root .sticky-call-number { font-size: 17px; font-weight: 700; color: #fff; line-height: 1.3; letter-spacing: 0.5px; }
 
@@ -101,7 +101,7 @@
  
 }
 
-  .lp-root .hero h1 em { font-style: normal; color: #ef4444; }
+  .lp-root .hero h1 em { font-style: normal; color: #ff8a84; }
 
   .lp-root .hero-sub { font-size: clamp(13px, 3.5vw, 15px); color: rgba(255,255,255,0.82); line-height: 1.75; margin-bottom: 28px; max-width: 540px; }
 
@@ -202,7 +202,7 @@
 
   .lp-root .attorney-name { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: 0.3px; margin-bottom: 3px; }
 
-  .lp-root .attorney-title { font-size: 11px; font-weight: 600; color: #b91c1c; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .lp-root .attorney-title { font-size: 11px; font-weight: 600; color: #ff8a84; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
 
   .lp-root .attorney-bio { font-size: 12px; color: rgba(255,255,255,0.82); line-height: 1.65; }
 
@@ -230,7 +230,7 @@
  
 }
 
-  .lp-root .attorney-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(185,28,28,0.15); border: 1px solid rgba(185,28,28,0.3); border-radius: 3px; padding: 4px 8px; font-size: 9px; font-weight: 700; color: #ef4444; letter-spacing: 0.5px; text-transform: uppercase; }
+  .lp-root .attorney-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(185,28,28,0.15); border: 1px solid rgba(185,28,28,0.3); border-radius: 3px; padding: 4px 8px; font-size: 9px; font-weight: 700; color: #ffb4ae; letter-spacing: 0.5px; text-transform: uppercase; }
 
   @media (min-width: 400px) {
  .lp-root .attorney-badge { font-size: 10px; padding: 5px 10px; }
@@ -251,7 +251,7 @@
  
 }
 
-  .lp-root .section-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #b91c1c; margin-bottom: 10px; }
+  .lp-root .section-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #ff8a84; margin-bottom: 10px; }
 
   @media (min-width: 1280px) {
  .lp-root .section-label { font-size: 13px; }
@@ -347,7 +347,7 @@
  
 }
 
-  .lp-root .result-num { font-size: clamp(20px, 5vw, 28px); font-weight: 800; color: #b91c1c; letter-spacing: -0.5px; line-height: 1; }
+  .lp-root .result-num { font-size: clamp(20px, 5vw, 28px); font-weight: 800; color: #ff8a84; letter-spacing: -0.5px; line-height: 1; }
 
   @media (min-width: 1280px) {
  .lp-root .result-num { font-size: 48px; }
@@ -392,7 +392,7 @@
  
 }
 
-  .lp-root .stars { color: #b91c1c; font-size: 15px; letter-spacing: 3px; margin-bottom: 14px; }
+  .lp-root .stars { color: #ff8a84; font-size: 15px; letter-spacing: 3px; margin-bottom: 14px; }
 
   .lp-root .testi-quote { font-size: 14px; font-style: italic; color: rgba(255,255,255,0.88); line-height: 1.75; margin-bottom: 20px; flex: 1; }
 
@@ -506,6 +506,8 @@
 
   .lp-root .field label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 7px; }
 
+  .lp-root .field-optional { color: #c7c7c7; font-weight: 400; }
+
   .lp-root .field input, .lp-root .field select, .lp-root .field textarea { width: 100%; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.14); border-radius: 4px; padding: 13px 14px; font-family: 'Montserrat', sans-serif; font-size: 14px; color: #fff; min-height: 48px; appearance: none; -webkit-appearance: none; outline: none; transition: border-color 0.15s; }
 
   .lp-root .field input:focus, .lp-root .field select:focus, .lp-root .field textarea:focus { border-color: #b91c1c; }
@@ -540,7 +542,7 @@
 
   .lp-root .bottom-cta h2 { font-size: clamp(17px, 4vw, 22px); font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.3px; }
 
-  .lp-root .bottom-cta p { font-size: 13px; color: rgba(255,255,255,0.78); margin-bottom: 22px; }
+  .lp-root .bottom-cta p { font-size: 13px; color: #ffffff; margin-bottom: 22px; }
 
   .lp-root .btn-white { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #b91c1c; border: none; border-radius: 4px; padding: 15px 28px; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; cursor: pointer; text-decoration: none; min-height: 52px; }
 
@@ -559,6 +561,8 @@
 }
 
   .lp-root .footer-copy { font-size: 10px; color: rgba(255,255,255,0.50); letter-spacing: 0.3px; line-height: 1.6; }
+
+  .lp-root .footer-opt-out { display: inline-block; margin-top: 10px; color: rgba(255,255,255,0.75); font-size: 12px; line-height: 1.4; text-decoration: underline; }
 
 
   /* Large screens */

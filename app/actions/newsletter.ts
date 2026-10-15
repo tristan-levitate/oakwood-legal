@@ -2,6 +2,7 @@
 
 import MongoDB from "./utils/MongoDB";
 import { INewsletterData } from "./utils/types";
+import { logNewsletterConsent } from "./consent";
 
 export async function submitNewsletter(data: {
   name: string;
@@ -24,6 +25,14 @@ export async function submitNewsletter(data: {
   };
 
   await MongoDB(newsletterData, "constant-contact-newsletters");
+
+  await logNewsletterConsent({
+    subscribed: true,
+    formName: "footer",
+    email: data.email,
+    name: data.name,
+    pageUrl: "",
+  });
 
   return { success: true };
 }
