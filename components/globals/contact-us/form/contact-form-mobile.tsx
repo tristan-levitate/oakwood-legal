@@ -9,6 +9,8 @@ import CustomInput from "../custom-input";
 import CustomTextarea from "../custom-textarea";
 import CustomSelect from "../custom-select";
 import CustomCheckbox from "../custom-checkbox";
+import ConsentLabel from "../../consent-label";
+import InquiryDisclaimer from "../../inquiry-disclaimer";
 import { submitForm } from "@/app/actions/forms";
 import { useGetClientInfo } from "@/utils/useGetClientInfo";
 import { Tracking } from "@/components/Tracking";
@@ -24,6 +26,7 @@ const formSchema = z.object({
   legalArea: z.string().min(1, "Legal area is required."),
   message: z.string().min(1, "Message is required."),
   newsletter: z.boolean().optional(),
+  callTextConsent: z.boolean().optional(),
 });
 
 export type IContactFormMobile = z.infer<typeof formSchema>;
@@ -42,6 +45,7 @@ export default function ContactFormMobile() {
       legalArea: "",
       message: "",
       newsletter: false,
+      callTextConsent: false,
     },
   });
 
@@ -185,11 +189,17 @@ export default function ContactFormMobile() {
                     name="newsletter"
                     label="Subscribe to our newsletter"
                   />
+
+                  <CustomCheckbox
+                    name="callTextConsent"
+                    label={<ConsentLabel />}
+                  />
                 </div>
               </div>
 
               {/* Submit Button */}
               <div className="w-full">
+                <InquiryDisclaimer className="mb-4" />
                 <button
                   type="submit"
                   disabled={isSubmitting}

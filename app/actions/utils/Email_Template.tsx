@@ -22,6 +22,7 @@ const Email_Template = (data: FormSubmissionData) => {
     message: "Message",
     legalArea: "Legal Area",
     newsletter: "Newsletter Subscription",
+    callTextConsent: "Call and Text Consent",
     eventId: "Event ID",
     ip: "IP Address",
     locationHref: "Page URL",
@@ -62,7 +63,7 @@ const Email_Template = (data: FormSubmissionData) => {
             let displayValue = data[keyName];
 
             // Handle boolean values for newsletter
-            if (keyName === "newsletter") {
+            if (keyName === "newsletter" || keyName === "callTextConsent") {
               displayValue = displayValue ? "Yes" : "No";
             }
 

@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 
 interface CustomCheckboxProps {
   name: string;
-  label: string;
+  label: React.ReactNode;
   className?: string;
 }
 
@@ -22,8 +22,8 @@ export default function CustomCheckbox({
   const hasError = errors[name];
 
   return (
-    <div className={`relative flex items-center space-x-3 ${className}`}>
-      <div className="relative">
+    <div className={`relative flex items-start space-x-3 ${className}`}>
+      <div className="relative mt-1 flex-shrink-0">
         <input
           {...register(name)}
           type="checkbox"
@@ -52,7 +52,7 @@ export default function CustomCheckbox({
       </div>
       <label 
         htmlFor={fieldId} 
-        className="text-sm mt-1 cursor-pointer text-white font-helvetica"
+        className="text-sm mt-1 cursor-pointer text-white font-helvetica leading-snug"
       >
         {label}
       </label>

@@ -9,6 +9,8 @@ import CustomInput from "../custom-input";
 import CustomTextarea from "../custom-textarea";
 import CustomSelect from "../custom-select";
 import CustomCheckbox from "../custom-checkbox";
+import ConsentLabel from "../../consent-label";
+import InquiryDisclaimer from "../../inquiry-disclaimer";
 import { submitForm } from "@/app/actions/forms";
 import { useGetClientInfo } from "@/utils/useGetClientInfo";
 import { Tracking } from "@/components/Tracking";
@@ -24,6 +26,7 @@ const formSchema = z.object({
   legalArea: z.string().min(1, "Legal area is required."),
   message: z.string().min(1, "Message is required."),
   newsletter: z.boolean().optional(),
+  callTextConsent: z.boolean().optional(),
 });
 
 export type IContactForm = z.infer<typeof formSchema>;
@@ -42,6 +45,7 @@ export default function ContactForm() {
       legalArea: "",
       message: "",
       newsletter: false,
+      callTextConsent: false,
     },
   });
 
@@ -119,12 +123,12 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="w-full h-auto min-[1450px]:h-[750px] rounded-xl mb-0 min-[750px]:max-[1449px]:mb-[-100px] min-[1450px]:mb-[-150px] bg-gradient-to-br from-[rgba(142,132,132,0.1)] to-[rgba(20,12,12,0.1)] relative">
+    <div className="w-full h-auto min-[1450px]:min-h-[750px] rounded-xl mb-0 min-[750px]:max-[1449px]:mb-[-100px] min-[1450px]:mb-[-150px] bg-gradient-to-br from-[rgba(142,132,132,0.1)] to-[rgba(20,12,12,0.1)] relative">
       {/* Overlay for additional transparency */}
-      <div className="absolute inset-0 bg-[rgba(255,255,255,0.05)] rounded-xl"></div>
-      <div className="relative z-10 h-full">
+      <div className="absolute inset-0"></div>
+      <div className="relative z-10 h-auto min-h-full">
         {/* Form content */}
-        <div className="p-4 min-[600px]:p-5 min-[768px]:p-6 min-[1024px]:p-7 min-[1450px]:p-8">
+        <div className="p-4 min-[600px]:p-5 min-[768px]:p-6 min-[1024px]:p-7 min-[1450px]:p-8 bg-[rgba(255,255,255,0.05)] rounded-xl">
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 min-[600px]:space-y-5 min-[768px]:space-y-6 min-[1024px]:space-y-7 min-[1450px]:space-y-8">
               {/* Form Fields Container */}
@@ -174,10 +178,16 @@ export default function ContactForm() {
                   name="newsletter"
                   label="Subscribe to our newsletter"
                 />
+
+                <CustomCheckbox
+                  name="callTextConsent"
+                  label={<ConsentLabel />}
+                />
               </div>
 
               {/* Submit Button */}
               <div>
+                <InquiryDisclaimer className="mb-4" />
                 <button
                   type="submit"
                   disabled={isSubmitting}

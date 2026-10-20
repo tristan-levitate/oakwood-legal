@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { submitForm } from "@/app/actions/forms";
 import { useGetClientInfo } from "@/utils/useGetClientInfo";
 import { Tracking } from "@/components/Tracking";
+import ConsentLabel from "@/components/globals/consent-label";
+import InquiryDisclaimer from "@/components/globals/inquiry-disclaimer";
 
 const PHONE_DISPLAY = "323-412-4595";
 const PHONE_HREF = "tel:+13234124595";
@@ -46,6 +48,7 @@ export default function EmploymentLawLP() {
     email: "",
     case_type: "",
     description: "",
+    callTextConsent: false,
   });
 
   const selectCase = (value: string) => {
@@ -79,6 +82,7 @@ export default function EmploymentLawLP() {
           legalArea: form.case_type,
           message: form.description || `Case type: ${form.case_type}`,
           newsletter: false,
+          callTextConsent: form.callTextConsent,
         },
         "Oakwood Legal Group - Form Submission",
         token,
@@ -630,8 +634,23 @@ export default function EmploymentLawLP() {
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
               />
             </div>
+            <div className="form-full consent-row">
+              <input
+                type="checkbox"
+                id="f-consent"
+                name="callTextConsent"
+                checked={form.callTextConsent}
+                onChange={(e) =>
+                  setForm({ ...form, callTextConsent: e.target.checked })
+                }
+              />
+              <label htmlFor="f-consent">
+                <ConsentLabel />
+              </label>
+            </div>
             <div className="form-full">
               {errorMsg && <p className="form-error">{errorMsg}</p>}
+              <InquiryDisclaimer className="form-disclaimer" />
               <button type="submit" className="btn-submit" disabled={isSubmitting}>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <line x1="22" y1="2" x2="11" y2="13" />

@@ -19,6 +19,7 @@ async function Twilio(data: FormSubmissionData) {
     message: "Message",
     legalArea: "Legal Area",
     newsletter: "Newsletter Subscription",
+    callTextConsent: "Call and Text Consent",
     eventId: "Event ID",
     ip: "IP Address",
     locationHref: "Page URL",
@@ -39,7 +40,7 @@ async function Twilio(data: FormSubmissionData) {
           return `${label}: TEXT_TO_BECOME_DESCRIPTION`;
         }
 
-        if (keyName === "newsletter") {
+        if (keyName === "newsletter" || keyName === "callTextConsent") {
           return `${label}: ${value ? "Yes" : "No"}`;
         }
 

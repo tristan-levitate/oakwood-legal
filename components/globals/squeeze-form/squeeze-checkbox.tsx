@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 
 interface SqueezeCheckboxProps {
   name: string;
-  label: string;
+  label: React.ReactNode;
   className?: string;
 }
 

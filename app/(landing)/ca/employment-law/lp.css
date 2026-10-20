@@ -524,6 +524,13 @@
 
   .lp-root .btn-submit svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
+  .lp-root .consent-row { display: flex; align-items: flex-start; gap: 10px; margin-top: 4px; }
+  .lp-root .consent-row input { width: 16px; height: 16px; margin-top: 3px; flex-shrink: 0; accent-color: #b91c1c; }
+  .lp-root .consent-row label { font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.8); cursor: pointer; }
+  .lp-root .consent-row a { color: #fff; text-decoration: underline; }
+  .lp-root .form-disclaimer { font-family: inherit; font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.7); margin: 0 0 12px; }
+  .lp-root .form-disclaimer a { color: #fff; text-decoration: underline; }
+
   .lp-root .form-fine { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 10px; color: rgba(255,255,255,0.65); letter-spacing: 0.2px; margin-top: 12px; text-align: center; white-space: nowrap; }
 
   .lp-root .form-fine svg { width: 12px; height: 12px; fill: none; stroke: rgba(255,255,255,0.65); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }

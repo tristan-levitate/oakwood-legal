@@ -11,6 +11,8 @@ import SqueezeSelect from "./squeeze-select";
 import SqueezeFormHeader from "./squeeze-form-header";
 import HorizontalTestimonial from "./horizontal-testimonial";
 import SqueezeCheckbox from "./squeeze-checkbox";
+import ConsentLabel from "../consent-label";
+import InquiryDisclaimer from "../inquiry-disclaimer";
 import { submitForm } from "@/app/actions/forms";
 import { useGetClientInfo } from "@/utils/useGetClientInfo";
 import { Tracking } from "@/components/Tracking";
@@ -27,6 +29,7 @@ const formSchema = z.object({
     legalArea: z.string().min(1, "Legal area is required."),
     message: z.string().min(1, "Message is required."),
     newsletter: z.boolean().optional(),
+    callTextConsent: z.boolean().optional(),
 });
 
 export type ISqueezeForm = z.infer<typeof formSchema>;
@@ -49,6 +52,7 @@ export default function SqueezeForm({ videos }: SqueezeFormProps) {
             legalArea: "",
             message: "",
             newsletter: false,
+            callTextConsent: false,
         },
     });
 
@@ -218,10 +222,16 @@ export default function SqueezeForm({ videos }: SqueezeFormProps) {
                                      name="newsletter"
                                      label="Subscribe to our newsletter for legal updates"
                                  />
+
+                                 <SqueezeCheckbox
+                                     name="callTextConsent"
+                                     label={<ConsentLabel />}
+                                 />
                             </div>
 
                              {/* Submit Button */}
                              <div className="pt-4">
+                                 <InquiryDisclaimer className="mb-4" />
                                  <button
                                      type="submit"
                                      disabled={isSubmitting}
