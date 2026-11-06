@@ -1,14 +1,15 @@
 import Script from "next/script";
 
 // Single source of truth for the Oakwood Legal Group GTM container.
-// Loaded from the cookie consent component only after marketing consent,
+// Loaded from the cookie consent component for every visitor who has not
+// opted out (rejected marketing or sent GPC, see cookie-consent.tsx),
 // on every page (main site + landing pages). This is what carries PPC
 // attribution across page navigations — e.g. a visitor who lands on
 // /ca/employment-law and then clicks through to /practice-areas keeps
 // the same dataLayer + cookies.
 export const GTM_ID = "GTM-WDRL3HS4";
 
-// Injected after marketing consent. afterInteractive is required because
+// Injected unless the visitor opted out. afterInteractive is required because
 // this script is mounted from a client component, not the root layout head.
 export function GTMHead() {
   return (
