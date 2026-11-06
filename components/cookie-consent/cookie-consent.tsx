@@ -28,6 +28,8 @@ export default function CookieConsent() {
 
     const [hasCheckedConsent, setHasCheckedConsent] = useState(false);
 
+    const [gpcEnabled, setGpcEnabled] = useState(false);
+
     useEffect(() => {
 
         const stored = readStoredCookieConsent();
@@ -62,6 +64,8 @@ export default function CookieConsent() {
         }
 
         pushGoogleConsent(resolved);
+
+        setGpcEnabled(gpcEnabled);
 
         setPreferences(resolved);
 
@@ -98,15 +102,27 @@ export default function CookieConsent() {
 
     }
 
+    // GTM loads for every visitor EXCEPT those who have opted out (rejected
+    // marketing / turned it off in preferences) or who send a Global Privacy
+    // Control signal. This follows the CCPA opt-out model and is needed so the
+    // CallRail number swap (loaded inside GTM) and PPC attribution work for
+    // visitors who have not interacted with the banner yet.
+    // Google tags inside the container still respect Consent Mode: the
+    // "default: denied" set in the root layout keeps Google cookies off until
+    // the visitor accepts, so Google only receives cookieless pings before that.
+    // Everything else (OpenAI pixel, Vercel analytics) stays behind marketing consent.
+    // Changed 7 Nov 2026 by OCA (approved by OCA paid media).
+    const shouldLoadGTM = hasMarketingConsent(preferences) || (preferences === null && !gpcEnabled);
+
     return (
 
         <>
 
+            {shouldLoadGTM ? <GTMHead /> : null}
+
             {hasMarketingConsent(preferences) ? (
 
                 <>
-
-                    <GTMHead />
 
                     <Tracking.OpenAI />
 
