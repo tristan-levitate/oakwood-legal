@@ -5,7 +5,7 @@ import "./lp.css";
 // PPC landing page — fully self-contained, no Sanity, no shared header/footer.
 // Lives at /ca/employment-law. Indexing disabled (paid-traffic page).
 // NOTE: GTM (GTM-WDRL3HS4) loads from the sitewide cookie consent component
-// after marketing consent, so it is intentionally NOT duplicated here. This
+// unless the visitor opted out, so it is intentionally NOT duplicated here. This
 // keeps the dataLayer continuous when a PPC visitor clicks from this LP
 // through to the main firm site, while avoiding loading the container twice.
 export const metadata: Metadata = {
