@@ -238,7 +238,7 @@ export default function EmploymentLawLP() {
 />
             <div className="attorney-info">
               <div className="attorney-name">Elan Zektser</div>
-              <div className="attorney-title">Founding Attorney</div>
+              <div className="attorney-title">Attorney</div>
               <p className="attorney-bio">
                 Elan Zektser is a former head of the Sexual Assault District
                 Attorney&apos;s Unit with over 170 jury trials to verdict. He
