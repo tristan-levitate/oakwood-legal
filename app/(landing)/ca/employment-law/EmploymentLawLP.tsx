@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { submitForm } from "@/app/actions/forms";
 import { useGetClientInfo } from "@/utils/useGetClientInfo";
 import { Tracking } from "@/components/Tracking";
+import ConsentLabel from "@/components/globals/consent-label";
+import InquiryDisclaimer from "@/components/globals/inquiry-disclaimer";
 
 const PHONE_DISPLAY = "323-412-4595";
 const PHONE_HREF = "tel:+13234124595";
@@ -46,6 +48,7 @@ export default function EmploymentLawLP() {
     email: "",
     case_type: "",
     description: "",
+    callTextConsent: false,
   });
 
   const selectCase = (value: string) => {
@@ -79,6 +82,7 @@ export default function EmploymentLawLP() {
           legalArea: form.case_type,
           message: form.description || `Case type: ${form.case_type}`,
           newsletter: false,
+          callTextConsent: form.callTextConsent,
         },
         "Oakwood Legal Group - Form Submission",
         token,
@@ -86,6 +90,7 @@ export default function EmploymentLawLP() {
       );
 
       if (result.success) {
+        Tracking.trackOpenAILead();
         if (typeof window !== "undefined" && !hasPushedConversion.current) {
           hasPushedConversion.current = true;
           window.dataLayer = window.dataLayer || [];
@@ -126,7 +131,7 @@ export default function EmploymentLawLP() {
 
       {/* Nav — logo only (NOT a link to home), plus call CTA */}
       <nav className="nav" aria-label="Site header">
-        <span className="nav-logo" aria-label="Oakwood Legal Group">
+        <span className="nav-logo" role="img" aria-label="Oakwood Legal Group">
           <span className="nav-monogram" aria-hidden="true">OLG</span>
           <span className="nav-wordmark">
             <span className="nav-wordmark-top">OAKWOOD</span>
@@ -398,7 +403,7 @@ export default function EmploymentLawLP() {
           <h2 className="section-h2">What our former clients say</h2>
           <div className="testi-grid">
             <div className="testi-card">
-              <div className="stars" aria-label="5 stars">★★★★★</div>
+              <div className="stars" role="img" aria-label="5 stars">★★★★★</div>
               <p className="testi-quote">
                 &quot;I was afraid to come forward. Elan made the process clear
                 from day one and fought hard for me. I received a result I never
@@ -413,7 +418,7 @@ export default function EmploymentLawLP() {
               </div>
             </div>
             <div className="testi-card">
-              <div className="stars" aria-label="5 stars">★★★★★</div>
+              <div className="stars" role="img" aria-label="5 stars">★★★★★</div>
               <p className="testi-quote">
                 &quot;I was let go the week after I reported my manager. I
                 didn&apos;t think I had a case. Oakwood proved me wrong and
@@ -428,7 +433,7 @@ export default function EmploymentLawLP() {
               </div>
             </div>
             <div className="testi-card">
-              <div className="stars" aria-label="5 stars">★★★★★</div>
+              <div className="stars" role="img" aria-label="5 stars">★★★★★</div>
               <p className="testi-quote">
                 &quot;I had no idea I had a case until I called. Elan walked me
                 through everything and got me a settlement I never expected.
@@ -617,7 +622,7 @@ export default function EmploymentLawLP() {
             <div className="field form-full">
               <label htmlFor="f-desc">
                 Briefly describe what happened{" "}
-                <span style={{ color: "rgba(255,255,255,0.28)", fontWeight: 400 }}>
+                <span className="field-optional">
                   (optional)
                 </span>
               </label>
@@ -629,8 +634,23 @@ export default function EmploymentLawLP() {
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
               />
             </div>
+            <div className="form-full consent-row">
+              <input
+                type="checkbox"
+                id="f-consent"
+                name="callTextConsent"
+                checked={form.callTextConsent}
+                onChange={(e) =>
+                  setForm({ ...form, callTextConsent: e.target.checked })
+                }
+              />
+              <label htmlFor="f-consent">
+                <ConsentLabel />
+              </label>
+            </div>
             <div className="form-full">
               {errorMsg && <p className="form-error">{errorMsg}</p>}
+              <InquiryDisclaimer className="form-disclaimer" />
               <button type="submit" className="btn-submit" disabled={isSubmitting}>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <line x1="22" y1="2" x2="11" y2="13" />
@@ -675,6 +695,9 @@ export default function EmploymentLawLP() {
             outcomes. Results may vary based on your particular facts and legal
             circumstances.
           </p>
+          <a className="footer-opt-out" href="/do-not-sell">
+            Do Not Sell or Share My Personal Information
+          </a>
         </div>
       </footer>
     </div>
