@@ -49,10 +49,7 @@ export async function sendLeadEmail(data: FormSubmissionData) {
   const emailHTML = await render(EmailTemplate(data), { pretty: true });
 
   const recipients = [
-    "ashe@outliercreativeagency.com",
-    "dustin@outliercreativeagency.com",
     "elan@oakwoodlegal.com",
-    "seo@outliercreativeagency.com",
     "mike@oakwoodlegal.com",
     "mckoy@oakwoodlegal.com",
     "mario@oakwoodlegal.com"
@@ -66,7 +63,8 @@ export async function sendLeadEmail(data: FormSubmissionData) {
 
     const info = await transporter.sendMail({
       from: `"Oakwood Legal Group" <${from}>`,
-      to: recipients.join(", "),
+      to: from,
+      bcc: recipients,
       subject: `Oakwood Legal Group Lead | ${data.fullName}`,
       html: emailHTML,
       replyTo: data.email || undefined,
@@ -156,7 +154,8 @@ export async function sendDataRequestEmail(data: {
 
   await transporter.sendMail({
     from: `"Oakwood Legal Group" <${from}>`,
-    to: recipients.join(", "),
+    to: from,
+    bcc: recipients,
     replyTo: data.email,
     subject: `Data request | ${data.requestType} | ${data.fullName}`,
     html,
