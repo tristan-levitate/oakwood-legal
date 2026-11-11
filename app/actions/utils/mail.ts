@@ -49,10 +49,10 @@ export async function sendLeadEmail(data: FormSubmissionData) {
   const emailHTML = await render(EmailTemplate(data), { pretty: true });
 
   const recipients = [
-    "elan@oakwoodlegal.com",
     "mike@oakwoodlegal.com",
     "mckoy@oakwoodlegal.com",
-    "mario@oakwoodlegal.com"
+    "mario@oakwoodlegal.com",
+    "rcamacho@oakwoodelgal.com"
   ];
 
   const transporter = createTransporter();
